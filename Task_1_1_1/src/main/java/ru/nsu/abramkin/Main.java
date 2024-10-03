@@ -1,7 +1,7 @@
 package ru.nsu.abramkin;
 
 /**
- * Класс с реализацией функций heapsort
+ * Класс с реализацией функций heapsort.
  */
 class Heapsort {
     public static void heapsort(int[] arr) {

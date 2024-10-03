@@ -1,9 +1,8 @@
 package ru.nsu.abramkin;
 
-import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -25,7 +24,13 @@ class PrintArrayTest {
         Main.printArray(arr);
 
         System.setOut(originalOut);
-        assertEquals("[1, 2, 3, 4, 5]\n", outContent.toString().replace("\r\n", "\n"));  // Убираем различия в переводах строк
+        assertEquals(
+                "[1, 2, 3, 4, 5]\n",
+                outContent.toString().replace(
+                        "\r\n",
+                        "\n"
+                )
+        );  // Убираем различия в переводах строк
     }
 
     /**
@@ -42,7 +47,10 @@ class PrintArrayTest {
         Main.printArray(arr);
 
         System.setOut(originalOut);
-        assertEquals("[]\n", outContent.toString().replace("\r\n", "\n"));
+        assertEquals("[]\n", outContent.toString().replace(
+                "\r\n",
+                "\n"
+        ));
     }
 
     /**
@@ -59,6 +67,9 @@ class PrintArrayTest {
         Main.printArray(arr);
 
         System.setOut(originalOut);
-        assertEquals("[42]\n", outContent.toString().replace("\r\n", "\n"));
+        assertEquals("[42]\n", outContent.toString().replace(
+                "\r\n",
+                "\n"
+        ));
     }
 }
