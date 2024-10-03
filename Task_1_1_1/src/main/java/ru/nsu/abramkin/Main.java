@@ -1,9 +1,9 @@
 package ru.nsu.abramkin;
 
 /**
- * Главный класс программы, содержащий метод main.
+ * Класс с реализацией функций heapsort
  */
-public class Main {
+class Heapsort {
     public static void heapsort(int[] arr) {
         int n = arr.length;
 
@@ -40,15 +40,19 @@ public class Main {
             heapify(arr, n, largest);
         }
     }
+}
 
-     static void printArray(int arr[]) {
+/**
+ * Главный класс программы, содержащий метод main.
+ */
+public class Main {
+    static void printArray(int arr[]) {
         int n = arr.length;
         System.out.print("[");
         for (int i = 0; i < n; ++i) {
             if (i < n - 1) {
                 System.out.print(arr[i] + ", ");
-            }
-            else {
+            } else {
                 System.out.print(arr[i]);
             }
         }
@@ -60,11 +64,9 @@ public class Main {
      * @param args аргументы командной строки.
      */
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-
         int[] arr = {12, 11, 19, 5, 6, 7};
 
-        heapsort(arr);
+        Heapsort.heapsort(arr);
 
         System.out.println("Sorted array is");
         printArray(arr);
