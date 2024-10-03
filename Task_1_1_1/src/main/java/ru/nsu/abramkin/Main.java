@@ -20,7 +20,7 @@ class Heapsort {
         }
     }
 
-    static void heapify(int arr[], int n, int i)  {
+    static void heapify(int[] arr, int n, int i)  {
         int largest = i;
         int l = 2 * i + 1;
         int r = 2 * i + 2;
@@ -46,7 +46,7 @@ class Heapsort {
  * Главный класс программы, содержащий метод main.
  */
 public class Main {
-    static void printArray(int arr[]) {
+    static void printArray(int[] arr) {
         int n = arr.length;
         System.out.print("[");
         for (int i = 0; i < n; ++i) {
