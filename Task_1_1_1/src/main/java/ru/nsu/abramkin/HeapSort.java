@@ -3,8 +3,8 @@ package ru.nsu.abramkin;
 /**
  * Класс с реализацией функций heapsort.
  */
-class Heapsort {
-    public static void heapsort(int[] arr) {
+public class HeapSort {
+    static void heapsort(int[] arr) {
         int n = arr.length;
 
         for (int i = n / 2 - 1; i >= 0; i--) {
@@ -57,23 +57,5 @@ class Printer {
             }
         }
         System.out.println("]");
-    }
-}
-
-/**
- * Главный класс программы, содержащий метод main.
- */
-class Main {
-    /**
-     * Точка входа в программу.
-     * @param args аргументы командной строки.
-     */
-    public static void main(String[] args) {
-        int[] arr = {12, 11, 19, 5, 6, 7};
-
-        Heapsort.heapsort(arr);
-
-        System.out.println("Sorted array is");
-        Printer.printArray(arr);
     }
 }

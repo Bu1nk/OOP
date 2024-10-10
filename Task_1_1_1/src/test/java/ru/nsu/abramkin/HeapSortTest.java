@@ -15,7 +15,7 @@ class HeapSortTest {
     @Test
     public void testSortedArray() {
         int[] arr = {1, 2, 3, 4, 5};
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
         assertArrayEquals(new int[] {1, 2, 3, 4, 5}, arr);
     }
 
@@ -26,7 +26,7 @@ class HeapSortTest {
     @Test
     public void testReversedArray() {
         int[] arr = {5, 4, 3, 2, 1};
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
         assertArrayEquals(new int[] {1, 2, 3, 4, 5}, arr);
     }
 
@@ -37,7 +37,7 @@ class HeapSortTest {
     @Test
     public void testUnsortedArray() {
         int[] arr = {3, 5, 1, 2, 4};
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
         assertArrayEquals(new int[] {1, 2, 3, 4, 5}, arr);
     }
 
@@ -47,7 +47,7 @@ class HeapSortTest {
     @Test
     public void testArrayWithDuplicates() {
         int[] arr = {4, 1, 3, 2, 1};
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
         assertArrayEquals(new int[] {1, 1, 2, 3, 4}, arr);
     }
 
@@ -58,7 +58,7 @@ class HeapSortTest {
     @Test
     public void testEmptyArray() {
         int[] arr = {};
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
         assertArrayEquals(new int[] {}, arr);
     }
 
@@ -69,7 +69,7 @@ class HeapSortTest {
     @Test
     public void testSingleElementArray() {
         int[] arr = {42};
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
         assertArrayEquals(new int[] {42}, arr);
     }
 
@@ -80,7 +80,7 @@ class HeapSortTest {
     @Test
     public void testArrayWithNegativeNumbers() {
         int[] arr = {-1, -3, 4, -2, 0};
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
         assertArrayEquals(new int[] {-3, -2, -1, 0, 4}, arr);
     }
 
@@ -94,7 +94,7 @@ class HeapSortTest {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = 1000 - i;
         }
-        Heapsort.heapsort(arr);
+        HeapSort.heapsort(arr);
 
         int[] expected = new int[1000];
         for (int i = 0; i < expected.length; i++) {
@@ -110,7 +110,7 @@ class HeapSortTest {
     @Test
     public void testHeapifySimple() {
         int[] arr = {4, 10, 3, 5, 1};
-        Heapsort.heapify(arr, arr.length, 0);
+        HeapSort.heapify(arr, arr.length, 0);
         assertArrayEquals(new int[] {10, 5, 3, 4, 1}, arr);
     }
 
@@ -121,7 +121,7 @@ class HeapSortTest {
     @Test
     public void testHeapifyAlreadyHeap() {
         int[] arr = {10, 5, 3, 4, 1};
-        Heapsort.heapify(arr, arr.length, 0);
+        HeapSort.heapify(arr, arr.length, 0);
         assertArrayEquals(new int[] {10, 5, 3, 4, 1}, arr);
     }
 
@@ -132,7 +132,7 @@ class HeapSortTest {
     @Test
     public void testHeapifyEmptyArray() {
         int[] arr = {};
-        Heapsort.heapify(arr, arr.length, 0);
+        HeapSort.heapify(arr, arr.length, 0);
         assertArrayEquals(new int[] {}, arr);
     }
 
@@ -143,7 +143,7 @@ class HeapSortTest {
     @Test
     public void testHeapifySingleElement() {
         int[] arr = {42};
-        Heapsort.heapify(arr, arr.length, 0);
+        HeapSort.heapify(arr, arr.length, 0);
         assertArrayEquals(new int[] {42}, arr);
     }
 }
