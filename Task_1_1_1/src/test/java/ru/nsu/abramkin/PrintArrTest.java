@@ -21,7 +21,7 @@ class PrintArrayTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
 
-        Main.printArray(arr);
+        Printer.printArray(arr);
 
         System.setOut(originalOut);
         assertEquals(
@@ -44,7 +44,7 @@ class PrintArrayTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
 
-        Main.printArray(arr);
+        Printer.printArray(arr);
 
         System.setOut(originalOut);
         assertEquals("[]\n", outContent.toString().replace(
@@ -64,7 +64,7 @@ class PrintArrayTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
 
-        Main.printArray(arr);
+        Printer.printArray(arr);
 
         System.setOut(originalOut);
         assertEquals("[42]\n", outContent.toString().replace(
