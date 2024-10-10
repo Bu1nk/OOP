@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 /**
  * Тесты для проверки корректности работы алгоритма HeapSort.
  */
-class MainTest {
+class HeapSortTest {
 
     /**
      * Тест для сортировки уже отсортированного массива.

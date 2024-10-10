@@ -43,9 +43,9 @@ class Heapsort {
 }
 
 /**
- * Главный класс программы, содержащий метод main.
+ * Класс, содержащий функцию, которая печатает массив
  */
-public class Main {
+class Printer {
     static void printArray(int[] arr) {
         int n = arr.length;
         System.out.print("[");
@@ -58,7 +58,12 @@ public class Main {
         }
         System.out.println("]");
     }
+}
 
+/**
+ * Главный класс программы, содержащий метод main.
+ */
+class Main {
     /**
      * Точка входа в программу.
      * @param args аргументы командной строки.
@@ -69,6 +74,6 @@ public class Main {
         Heapsort.heapsort(arr);
 
         System.out.println("Sorted array is");
-        printArray(arr);
+        Printer.printArray(arr);
     }
 }
