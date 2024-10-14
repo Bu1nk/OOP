@@ -16,7 +16,8 @@ public class Dealer extends Player {
      */
     public void revealFirstCard() {
         System.out.println("    Карты дилера: " +
-                "[" + hand.get(0) +
+                "[" +
+                hand.get(0) +
                 ", <закрытая карта>]");
     }
 }
