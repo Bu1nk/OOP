@@ -1,6 +1,8 @@
 package ru.nsu.abramkin;
 
 import org.junit.jupiter.api.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -58,4 +60,31 @@ class DealerTest {
         dealer.takeCard(new Card("Пики", "Тройка", 3));
         assertFalse(dealer.shouldTakeCard()); // 18 очков, больше 17, карту брать не нужно
     }
+
+    /**
+     * Тест, проверяющий корректность показа первой карты дилера.
+     */
+    @Test
+    void testRevealFirstCard() {
+        // Подготавливаем поток для захвата вывода в консоль
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Создаем дилера и добавляем ему карты
+        Dealer dealer = new Dealer();
+        dealer.takeCard(new Card("Черви", "Туз", 11));
+        dealer.takeCard(new Card("Пики", "Король", 10));
+
+        // Вызываем метод для показа первой карты
+        dealer.revealFirstCard();
+
+        // Восстанавливаем оригинальный поток вывода
+        System.setOut(originalOut);
+
+        // Проверяем корректность вывода
+        String expectedOutput = "    Карты дилера: [Туз Черви (11), <закрытая карта>]" + System.lineSeparator();
+        assertEquals(expectedOutput, outContent.toString());
+    }
+
 }

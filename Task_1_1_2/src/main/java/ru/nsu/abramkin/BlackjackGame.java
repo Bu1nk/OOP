@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 public class BlackjackGame {
     private Deck deck;  // Колода карт
-    private Player player;  // Игрок
-    private Dealer dealer;  // Дилер
+    public Player player;  // Игрок
+    public Dealer dealer;  // Дилер
     private int plScore;
     private int dlScore;
 
