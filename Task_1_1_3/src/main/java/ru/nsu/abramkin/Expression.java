@@ -2,14 +2,18 @@ package ru.nsu.abramkin;
 
 import java.util.Map;
 
-// Абстрактный класс для всех выражений
+/**
+ * Абстрактный класс для всех выражений.
+ */
 abstract class Expression {
     public abstract int eval(Map<String, Integer> variables);
     public abstract Expression derivative(String variable);
     public abstract String toString();
 }
 
-// Класс для констант
+/**
+ * Класс для констант.
+ */
 class Number extends Expression {
     private final int value;
 
@@ -33,7 +37,9 @@ class Number extends Expression {
     }
 }
 
-// Класс для переменных
+/**
+ * Класс для переменных.
+ */
 class Variable extends Expression {
     private final String name;
 
@@ -61,7 +67,9 @@ class Variable extends Expression {
     }
 }
 
-// Класс для сложения
+/**
+ * Класс для сложения.
+ */
 class Add extends Expression {
     private final Expression left;
     private final Expression right;
@@ -87,7 +95,9 @@ class Add extends Expression {
     }
 }
 
-// Класс для вычитания
+/**
+ * Класс для вычитания.
+ */
 class Sub extends Expression {
     private final Expression left;
     private final Expression right;
@@ -113,7 +123,9 @@ class Sub extends Expression {
     }
 }
 
-// Класс для умножения
+/**
+ * Класс для умножения.
+ */
 class Mul extends Expression {
     private final Expression left;
     private final Expression right;
