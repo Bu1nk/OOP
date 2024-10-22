@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.abramkin","l":"ExpressionUtils"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.abramkin","l":"Expression"},{"p":"ru.nsu.abramkin","l":"ExpressionUtils"}]
