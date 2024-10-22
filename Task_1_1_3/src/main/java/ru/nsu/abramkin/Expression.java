@@ -3,18 +3,43 @@ package ru.nsu.abramkin;
 import java.util.Map;
 
 /**
- * Абстрактный класс для всех выражений.
+ * Интерфейс для всех математических выражений.
+ * Описывает базовые операции, такие как вычисление значения выражения,
+ * нахождение производной и представление выражения в виде строки.
  */
-abstract class Expression {
-    public abstract int eval(Map<String, Integer> variables);
-    public abstract Expression derivative(String variable);
-    public abstract String toString();
+public interface Expression {
+
+    /**
+     * Вычисляет значение выражения при подстановке значений переменных.
+     *
+     * @param variables карта переменных, где ключ — это имя переменной, а значение — её числовое значение
+     * @return вычисленное значение выражения
+     * @throws IllegalArgumentException если одна из переменных не определена
+     */
+    int eval(Map<String, Integer> variables);
+
+    /**
+     * Возвращает производную выражения по указанной переменной.
+     *
+     * @param variable имя переменной, по которой нужно взять производную
+     * @return новое выражение, представляющее собой производную исходного выражения
+     */
+    Expression derivative(String variable);
+
+    /**
+     * Возвращает строковое представление выражения в формате,
+     * который отражает его математическую структуру.
+     *
+     * @return строка, представляющая выражение
+     */
+    @Override
+    String toString();
 }
 
 /**
  * Класс для констант.
  */
-class Number extends Expression {
+class Number implements Expression {
     private final int value;
 
     public Number(int value) {
@@ -40,7 +65,7 @@ class Number extends Expression {
 /**
  * Класс для переменных.
  */
-class Variable extends Expression {
+class Variable implements Expression {
     private final String name;
 
     public Variable(String name) {
@@ -70,7 +95,7 @@ class Variable extends Expression {
 /**
  * Класс для сложения.
  */
-class Add extends Expression {
+class Add implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -98,7 +123,7 @@ class Add extends Expression {
 /**
  * Класс для вычитания.
  */
-class Sub extends Expression {
+class Sub implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -126,7 +151,7 @@ class Sub extends Expression {
 /**
  * Класс для умножения.
  */
-class Mul extends Expression {
+class Mul implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -155,8 +180,10 @@ class Mul extends Expression {
     }
 }
 
-// Класс для деления
-class Div extends Expression {
+/**
+ * Класс для деления.
+ */
+class Div implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -172,7 +199,6 @@ class Div extends Expression {
 
     @Override
     public Expression derivative(String variable) {
-        // (u/v)' = (u'*v - u*v') / (v*v)
         return new Div(
                 new Sub(
                         new Mul(left.derivative(variable), right),

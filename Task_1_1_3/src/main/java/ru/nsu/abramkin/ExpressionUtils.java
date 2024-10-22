@@ -8,11 +8,10 @@ import java.util.Map;
  */
 public class ExpressionUtils {
 
-    // Метод для парсинга переменных из строки
     public static Map<String, Integer> parseVariables(String input) {
         Map<String, Integer> variables = new HashMap<>();
         if (input == null || input.isEmpty()) {
-            return variables;  // Возвращаем пустую карту, если строка пустая
+            return variables;
         }
 
         String[] assignments = input.split(";");
