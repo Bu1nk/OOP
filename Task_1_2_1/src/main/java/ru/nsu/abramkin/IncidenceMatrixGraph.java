@@ -117,9 +117,9 @@ public class IncidenceMatrixGraph implements Graph {
         boolean edgeFound = false;
 
         for (int j = 0; j < edgeCount; j++) {
-            if ((v1 == v2 && incidenceMatrix[v1][j] == 2) ||
-                    (incidenceMatrix[v1][j] == 1 && incidenceMatrix[v2][j] == -1) ||
-                    (incidenceMatrix[v1][j] == -1 && incidenceMatrix[v2][j] == 1)) {
+            if ((v1 == v2 && incidenceMatrix[v1][j] == 2)
+                    || (incidenceMatrix[v1][j] == 1 && incidenceMatrix[v2][j] == -1)
+                    || (incidenceMatrix[v1][j] == -1 && incidenceMatrix[v2][j] == 1)) {
 
                 for (int i = 0; i < vertexCount; i++) {
                     incidenceMatrix[i][j] = 0;
