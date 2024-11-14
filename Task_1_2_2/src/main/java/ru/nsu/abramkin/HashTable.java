@@ -126,7 +126,7 @@ public class HashTable<K, V> {
      *
      * @param key ключ элемента для удаления
      * @return {@code true}, если элемент был удален,
-     * {@code false} иначе
+     *      {@code false} иначе
      */
     public boolean remove(K key) {
         int index = hash(key);
@@ -149,7 +149,7 @@ public class HashTable<K, V> {
      *
      * @param key ключ для проверки
      * @return {@code true}, если ключ присутствует,
-     * {@code false} иначе
+     *      {@code false} иначе
      */
     public boolean containsKey(K key) {
         return get(key) != null;
@@ -182,7 +182,9 @@ public class HashTable<K, V> {
      * @return {@code true}, если таблицы равны, {@code false} иначе
      */
     public boolean equals(HashTable<K, V> other) {
-        if (this.size != other.size) return false;
+        if (this.size != other.size) {
+            return false;
+        }
         for (K key : this.keys()) {
             if (!Objects.equals(this.get(key), other.get(key))) {
                 return false;
@@ -208,7 +210,9 @@ public class HashTable<K, V> {
                         .append(", ");
             }
         }
-        if (sb.length() > 1) sb.setLength(sb.length() - 2);
+        if (sb.length() > 1) {
+            sb.setLength(sb.length() - 2);
+        }
         sb.append("}");
         return sb.toString();
     }
@@ -236,8 +240,8 @@ public class HashTable<K, V> {
                 while (bucketIndex < capacity && table.get(bucketIndex).isEmpty()) {
                     bucketIndex++;
                 }
-                return bucketIndex < capacity ?
-                        table.get(bucketIndex).iterator() :
+                return bucketIndex < capacity
+                        ? table.get(bucketIndex).iterator() :
                         null;
             }
 

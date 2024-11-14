@@ -1,7 +1,7 @@
 package ru.nsu.abramkin;
 
-import java.util.Iterator;
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
