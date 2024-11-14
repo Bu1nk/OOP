@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"ru.nsu.abramkin","c":"SearchSubstring","l":"find(String, String)","url":"find(java.lang.String,java.lang.String)"},{"p":"ru.nsu.abramkin","c":"SearchSubstring","l":"SearchSubstring()","url":"%3Cinit%3E()"}]
