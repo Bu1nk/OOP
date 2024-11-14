@@ -7,17 +7,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс для представления графа с использованием матрицы инцидентности.
+ */
 public class IncidenceMatrixGraph implements Graph {
     private int[][] incidenceMatrix;
     int vertexCount;
     int edgeCount;
 
+    /**
+     * Конструктор графа с начальной емкостью.
+     *
+     * @param initialVertexSize начальное количество вершин.
+     * @param initialEdgeSize начальное количество ребер.
+     */
     public IncidenceMatrixGraph(int initialVertexSize, int initialEdgeSize) {
         incidenceMatrix = new int[initialVertexSize][initialEdgeSize];
         vertexCount = 0;
         edgeCount = 0;
     }
 
+    /**
+     * Добавляет новую вершину в граф.
+     */
     @Override
     public void addVertex() {
         vertexCount++;
@@ -35,6 +47,12 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Удаляет вершину из графа.
+     *
+     * @param v индекс вершины.
+     * @throws IllegalArgumentException если вершина не существует.
+     */
     @Override
     public void removeVertex(int v) {
         if (v >= vertexCount || v < 0) {
@@ -48,6 +66,13 @@ public class IncidenceMatrixGraph implements Graph {
         vertexCount--;
     }
 
+    /**
+     * Добавляет ребро между двумя вершинами.
+     *
+     * @param v1 индекс первой вершины.
+     * @param v2 индекс второй вершины.
+     * @throws IllegalArgumentException если одна или обе вершины не существуют.
+     */
     @Override
     public void addEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
@@ -76,6 +101,13 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Удаляет ребро между двумя вершинами.
+     *
+     * @param v1 индекс первой вершины.
+     * @param v2 индекс второй вершины.
+     * @throws IllegalArgumentException если одна или обе вершины не существуют.
+     */
     @Override
     public void removeEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
@@ -103,6 +135,13 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Возвращает список соседей для заданной вершины.
+     *
+     * @param v индекс вершины.
+     * @return список индексов соседних вершин.
+     * @throws IllegalArgumentException если вершина не существует.
+     */
     @Override
     public List<Integer> getNeighbors(int v) {
         if (v >= vertexCount || v < 0) {
@@ -124,6 +163,12 @@ public class IncidenceMatrixGraph implements Graph {
         return neighbors;
     }
 
+    /**
+     * Загружает граф из файла.
+     *
+     * @param filename имя файла.
+     * @throws IllegalArgumentException если файл не найден или содержит ошибки.
+     */
     @Override
     public void loadFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
@@ -181,6 +226,12 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Проверяет равенство двух графов.
+     *
+     * @param o объект для сравнения.
+     * @return true, если графы равны, иначе false.
+     */
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof IncidenceMatrixGraph)) {
@@ -200,6 +251,11 @@ public class IncidenceMatrixGraph implements Graph {
         return true;
     }
 
+    /**
+     * Преобразует граф в строку.
+     *
+     * @return строковое представление графа.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -7,21 +7,36 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Класс для представления графа с использованием списка смежности.
+ */
 public class AdjacencyListGraph implements Graph {
     private List<List<Integer>> adjacencyList;
     int vertexCount;
 
+    /**
+     * Конструктор графа с начальной емкостью.
+     */
     public AdjacencyListGraph() {
         adjacencyList = new ArrayList<>();
         vertexCount = 0;
     }
 
+    /**
+     * Добавляет новую вершину в граф.
+     */
     @Override
     public void addVertex() {
         adjacencyList.add(new LinkedList<>());
         vertexCount++;
     }
 
+    /**
+     * Удаляет вершину из графа.
+     *
+     * @param v индекс вершины.
+     * @throws IllegalArgumentException если вершина не существует.
+     */
     @Override
     public void removeVertex(int v) {
         if (v >= vertexCount || v < 0) {
@@ -45,6 +60,13 @@ public class AdjacencyListGraph implements Graph {
         }
     }
 
+    /**
+     * Добавляет ребро между двумя вершинами.
+     *
+     * @param v1 индекс первой вершины.
+     * @param v2 индекс второй вершины.
+     * @throws IllegalArgumentException если одна или обе вершины не существуют.
+     */
     @Override
     public void addEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
@@ -55,6 +77,13 @@ public class AdjacencyListGraph implements Graph {
         adjacencyList.get(v2).add(v1); // Для неориентированного графа
     }
 
+    /**
+     * Удаляет ребро между двумя вершинами.
+     *
+     * @param v1 индекс первой вершины.
+     * @param v2 индекс второй вершины.
+     * @throws IllegalArgumentException если одна или обе вершины не существуют.
+     */
     @Override
     public void removeEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
@@ -65,6 +94,13 @@ public class AdjacencyListGraph implements Graph {
         adjacencyList.get(v2).remove(Integer.valueOf(v1)); // Для неориентированного графа
     }
 
+    /**
+     * Возвращает список соседей для заданной вершины.
+     *
+     * @param v индекс вершины.
+     * @return список индексов соседних вершин.
+     * @throws IllegalArgumentException если вершина не существует.
+     */
     @Override
     public List<Integer> getNeighbors(int v) {
         if (v >= vertexCount || v < 0) {
@@ -73,6 +109,12 @@ public class AdjacencyListGraph implements Graph {
         return new ArrayList<>(adjacencyList.get(v));
     }
 
+    /**
+     * Загружает граф из файла.
+     *
+     * @param filename имя файла.
+     * @throws IllegalArgumentException если файл не найден или содержит ошибки.
+     */
     @Override
     public void loadFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
@@ -97,6 +139,12 @@ public class AdjacencyListGraph implements Graph {
         }
     }
 
+    /**
+     * Проверяет равенство двух графов.
+     *
+     * @param o объект для сравнения.
+     * @return true, если графы равны, иначе false.
+     */
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof AdjacencyListGraph)) {
@@ -106,6 +154,11 @@ public class AdjacencyListGraph implements Graph {
         return adjacencyList.equals(other.adjacencyList);
     }
 
+    /**
+     * Преобразует граф в строку.
+     *
+     * @return строковое представление графа.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

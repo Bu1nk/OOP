@@ -5,14 +5,23 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Тесты для класса AdjacencyListGraph.
+ */
 class AdjacencyListGraphTest {
     private AdjacencyListGraph graph;
 
+    /**
+     * Устанавливает начальное состояние графа перед каждым тестом.
+     */
     @BeforeEach
     void setUp() {
         graph = new AdjacencyListGraph();
     }
 
+    /**
+     * Тест добавления вершины в граф.
+     */
     @Test
     void testAddVertex() {
         graph.addVertex();
@@ -20,6 +29,9 @@ class AdjacencyListGraphTest {
         assertEquals(2, graph.vertexCount);
     }
 
+    /**
+     * Тест добавления ребра между вершинами.
+     */
     @Test
     void testAddEdge() {
         graph.addVertex();
@@ -29,6 +41,9 @@ class AdjacencyListGraphTest {
         assertEquals(List.of(0), graph.getNeighbors(1));
     }
 
+    /**
+     * Тест удаления ребра между вершинами.
+     */
     @Test
     void testRemoveEdge() {
         graph.addVertex();
@@ -39,6 +54,9 @@ class AdjacencyListGraphTest {
         assertTrue(graph.getNeighbors(1).isEmpty());
     }
 
+    /**
+     * Тест удаления вершины из графа.
+     */
     @Test
     void testRemoveVertex() {
         graph.addVertex();
@@ -49,6 +67,9 @@ class AdjacencyListGraphTest {
         assertTrue(graph.getNeighbors(0).isEmpty());
     }
 
+    /**
+     * Тест получения списка соседей вершины.
+     */
     @Test
     void testGetNeighbors() {
         graph.addVertex();
@@ -58,6 +79,9 @@ class AdjacencyListGraphTest {
         assertEquals(List.of(0), graph.getNeighbors(1));
     }
 
+    /**
+     * Тест загрузки графа из файла.
+     */
     @Test
     void testLoadFromFile() {
         graph.loadFromFile("testGraphList.txt");
@@ -68,6 +92,9 @@ class AdjacencyListGraphTest {
         assertEquals(List.of(1), graph.getNeighbors(2));
     }
 
+    /**
+     * Тест проверки равенства двух графов.
+     */
     @Test
     void testEquals() {
         AdjacencyListGraph graph1 = new AdjacencyListGraph();
@@ -87,6 +114,9 @@ class AdjacencyListGraphTest {
         assertNotEquals(graph1, graph2);
     }
 
+    /**
+     * Тест строкового представления графа.
+     */
     @Test
     void testToString() {
         graph.addVertex();

@@ -6,19 +6,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Класс для представления графа с использованием матрицы смежности.
+ */
 public class AdjacencyMatrixGraph implements Graph {
     private int[][] adjacencyMatrix;
     int vertexCount;
 
+    /**
+     * Конструктор графа с начальной емкостью.
+     *
+     * @param initialSize начальное количество вершин.
+     */
     public AdjacencyMatrixGraph(int initialSize) {
         adjacencyMatrix = new int[initialSize][initialSize];
         vertexCount = 0;
     }
 
+    /**
+     * Проверяет, существует ли вершина в графе.
+     *
+     * @param vertex индекс вершины.
+     * @return true, если вершина существует, иначе false.
+     */
     public boolean hasVertex(int vertex) {
         return vertex >= 0 && vertex < vertexCount;
     }
 
+    /**
+     * Проверяет, существует ли ребро между двумя вершинами.
+     *
+     * @param v1 индекс первой вершины.
+     * @param v2 индекс второй вершины.
+     * @return true, если ребро существует, иначе false.
+     * @throws IllegalArgumentException если одна или обе вершины не существуют.
+     */
     public boolean hasEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
             throw new IllegalArgumentException("Одна или обе вершины не существуют");
@@ -26,6 +48,9 @@ public class AdjacencyMatrixGraph implements Graph {
         return adjacencyMatrix[v1][v2] == 1;
     }
 
+    /**
+     * Добавляет новую вершину в граф.
+     */
     @Override
     public void addVertex() {
         vertexCount++;
@@ -46,6 +71,12 @@ public class AdjacencyMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Удаляет вершину из графа.
+     *
+     * @param v индекс вершины.
+     * @throws IllegalArgumentException если вершина не существует.
+     */
     @Override
     public void removeVertex(int v) {
         if (v >= vertexCount || v < 0) {
@@ -65,6 +96,13 @@ public class AdjacencyMatrixGraph implements Graph {
         vertexCount--;
     }
 
+    /**
+     * Добавляет ребро между двумя вершинами.
+     *
+     * @param v1 индекс первой вершины.
+     * @param v2 индекс второй вершины.
+     * @throws IllegalArgumentException если одна или обе вершины не существуют.
+     */
     @Override
     public void addEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
@@ -74,6 +112,13 @@ public class AdjacencyMatrixGraph implements Graph {
         adjacencyMatrix[v2][v1] = 1; // Для неориентированного графа
     }
 
+    /**
+     * Удаляет ребро между двумя вершинами.
+     *
+     * @param v1 индекс первой вершины.
+     * @param v2 индекс второй вершины.
+     * @throws IllegalArgumentException если одна или обе вершины не существуют.
+     */
     @Override
     public void removeEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
@@ -83,6 +128,13 @@ public class AdjacencyMatrixGraph implements Graph {
         adjacencyMatrix[v2][v1] = 0; // Для неориентированного графа
     }
 
+    /**
+     * Возвращает список соседей для заданной вершины.
+     *
+     * @param v индекс вершины.
+     * @return список индексов соседних вершин.
+     * @throws IllegalArgumentException если вершина не существует.
+     */
     @Override
     public List<Integer> getNeighbors(int v) {
         if (v >= vertexCount || v < 0) {
@@ -98,6 +150,12 @@ public class AdjacencyMatrixGraph implements Graph {
         return neighbors;
     }
 
+    /**
+     * Загружает граф из файла.
+     *
+     * @param filename имя файла.
+     * @throws IllegalArgumentException если файл не найден или содержит ошибки.
+     */
     @Override
     public void loadFromFile(String filename) {
         try {
@@ -131,6 +189,12 @@ public class AdjacencyMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Проверяет равенство двух графов.
+     *
+     * @param o объект для сравнения.
+     * @return true, если графы равны, иначе false.
+     */
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof AdjacencyMatrixGraph)) {
@@ -150,6 +214,11 @@ public class AdjacencyMatrixGraph implements Graph {
         return true;
     }
 
+    /**
+     * Преобразует граф в строку.
+     *
+     * @return строковое представление графа.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
