@@ -1,9 +1,9 @@
 package ru.nsu.abramkin;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.ConcurrentModificationException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -23,7 +23,8 @@ public class HashTableTest {
 
     /**
      * Тест добавления и получения элементов.
-     * Проверяет, что добавленные элементы можно получить по ключу.
+     * Проверяет, что добавленные элементы
+     * можно получить по ключу.
      */
     @Test
     public void testPutAndGet() {
@@ -36,7 +37,8 @@ public class HashTableTest {
 
     /**
      * Тест обновления значения по существующему ключу.
-     * Проверяет, что обновление значения корректно перезаписывает старое значение.
+     * Проверяет, что обновление значения
+     * корректно перезаписывает старое значение.
      */
     @Test
     public void testUpdate() {
@@ -47,7 +49,8 @@ public class HashTableTest {
 
     /**
      * Тест удаления элемента по ключу.
-     * Проверяет, что удаленный элемент не доступен по ключу и размер таблицы уменьшается.
+     * Проверяет, что удаленный элемент не доступен
+     * по ключу и размер таблицы уменьшается.
      */
     @Test
     public void testRemove() {
@@ -60,7 +63,8 @@ public class HashTableTest {
 
     /**
      * Тест проверки наличия ключа.
-     * Проверяет, что метод корректно определяет наличие или отсутствие ключа.
+     * Проверяет, что метод корректно
+     * определяет наличие или отсутствие ключа.
      */
     @Test
     public void testContainsKey() {
@@ -71,7 +75,8 @@ public class HashTableTest {
 
     /**
      * Тест корректной работы метода toString.
-     * Проверяет, что вывод строкового представления содержит все пары ключ-значение.
+     * Проверяет, что вывод строкового
+     * представления содержит все пары ключ-значение.
      */
     @Test
     public void testToString() {
@@ -84,26 +89,31 @@ public class HashTableTest {
 
     /**
      * Тест итерации по элементам хеш-таблицы.
-     * Проверяет, что итерирование по таблице проходит без ошибок и корректно выбрасывает исключение.
+     * Проверяет, что итерирование по таблице
+     * проходит без ошибок и корректно выбрасывает исключение.
      */
     @Test
-    public void testIterationWithConcurrentModificationException() {
+    public void testIteratWithConcurrModException() {
         hashTable.put("one", 1);
         hashTable.put("two", 2);
 
-        Iterator<HashTable.Entry<String, Number>> iterator = hashTable.entries().iterator();
+        Iterator<HashTable.Entry<String, Number>> iterator =
+                hashTable.entries()
+                        .iterator();
 
         assertTrue(iterator.hasNext());
-        assertEquals("one=1", iterator.next().toString());
+        assertEquals("one=1",
+                iterator.next().toString());
 
-        // Добавление нового элемента должно вызвать ConcurrentModificationException
         hashTable.put("three", 3);
-        assertThrows(ConcurrentModificationException.class, iterator::hasNext);
+        assertThrows(ConcurrentModificationException.class,
+                iterator::hasNext);
     }
 
     /**
      * Тест на равенство хеш-таблиц.
-     * Проверяет, что две таблицы считаются равными при одинаковых элементах.
+     * Проверяет, что две таблицы
+     * считаются равными при одинаковых элементах.
      */
     @Test
     public void testEquals() {
@@ -120,7 +130,8 @@ public class HashTableTest {
 
     /**
      * Тест увеличения размера таблицы.
-     * Проверяет, что таблица корректно увеличивает емкость при достижении порога.
+     * Проверяет, что таблица корректно
+     * увеличивает емкость при достижении порога.
      */
     @Test
     public void testResize() {

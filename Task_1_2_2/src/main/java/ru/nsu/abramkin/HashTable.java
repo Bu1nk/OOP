@@ -9,8 +9,10 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Класс {@code HashTable} представляет собой параметризованный контейнер для хранения пар ключ-значение.
- * Позволяет добавлять, искать, удалять и обновлять элементы за константное время.
+ * Класс {@code HashTable} представляет
+ * собой параметризованный контейнер для хранения пар ключ-значение.
+ * Позволяет добавлять, искать,
+ * удалять и обновлять элементы за константное время.
  *
  * @param <K> тип ключа
  * @param <V> тип значения
@@ -57,7 +59,8 @@ public class HashTable<K, V> {
     }
 
     /**
-     * Увеличивает размер хеш-таблицы и перераспределяет существующие элементы при превышении
+     * Увеличивает размер хеш-таблицы и
+     * перераспределяет существующие элементы при превышении
      * порога загрузки {@code LOAD_FACTOR}.
      */
     private void resize() {
@@ -78,7 +81,9 @@ public class HashTable<K, V> {
     }
 
     /**
-     * Добавляет новую пару ключ-значение в хеш-таблицу или обновляет значение, если ключ уже существует.
+     * Добавляет новую пару ключ-значение
+     * в хеш-таблицу или обновляет значение,
+     * если ключ уже существует.
      *
      * @param key   ключ
      * @param value значение
@@ -120,7 +125,8 @@ public class HashTable<K, V> {
      * Удаляет пару ключ-значение по указанному ключу.
      *
      * @param key ключ элемента для удаления
-     * @return {@code true}, если элемент был удален, {@code false} иначе
+     * @return {@code true}, если элемент был удален,
+     * {@code false} иначе
      */
     public boolean remove(K key) {
         int index = hash(key);
@@ -142,14 +148,16 @@ public class HashTable<K, V> {
      * Проверяет, содержится ли указанный ключ в хеш-таблице.
      *
      * @param key ключ для проверки
-     * @return {@code true}, если ключ присутствует, {@code false} иначе
+     * @return {@code true}, если ключ присутствует,
+     * {@code false} иначе
      */
     public boolean containsKey(K key) {
         return get(key) != null;
     }
 
     /**
-     * Обновляет значение, связанное с указанным ключом. Если ключ отсутствует, добавляет новую пару.
+     * Обновляет значение, связанное с указанным ключом.
+     * Если ключ отсутствует, добавляет новую пару.
      *
      * @param key   ключ
      * @param value новое значение
@@ -184,7 +192,8 @@ public class HashTable<K, V> {
     }
 
     /**
-     * Возвращает строковое представление хеш-таблицы в формате {@code {key1=value1, key2=value2, ...}}.
+     * Возвращает строковое представление
+     * хеш-таблицы в формате {@code {key1=value1, key2=value2, ...}}.
      *
      * @return строковое представление таблицы
      */
@@ -193,17 +202,21 @@ public class HashTable<K, V> {
         StringBuilder sb = new StringBuilder("{");
         for (LinkedList<Entry<K, V>> bucket : table) {
             for (Entry<K, V> entry : bucket) {
-                sb.append(entry.key).append("=").append(entry.value).append(", ");
+                sb.append(entry.key)
+                        .append("=")
+                        .append(entry.value)
+                        .append(", ");
             }
         }
-        if (sb.length() > 1) sb.setLength(sb.length() - 2); // Убираем последнюю запятую и пробел
+        if (sb.length() > 1) sb.setLength(sb.length() - 2);
         sb.append("}");
         return sb.toString();
     }
 
     /**
      * Возвращает итератор для обхода всех элементов хеш-таблицы.
-     * При изменении таблицы во время итерации выбрасывается {@link ConcurrentModificationException}.
+     * При изменении таблицы во время
+     * итерации выбрасывается {@link ConcurrentModificationException}.
      *
      * @return итератор по элементам таблицы
      */
@@ -211,7 +224,8 @@ public class HashTable<K, V> {
         return () -> new Iterator<Entry<K, V>>() {
             private final int expectedModCount = modCount;
             private int bucketIndex = 0;
-            private Iterator<Entry<K, V>> bucketIterator = getBucketIterator();
+            private Iterator<Entry<K, V>> bucketIterator =
+                    getBucketIterator();
 
             /**
              * Возвращает итератор для текущего непустого бакета.
@@ -222,18 +236,24 @@ public class HashTable<K, V> {
                 while (bucketIndex < capacity && table.get(bucketIndex).isEmpty()) {
                     bucketIndex++;
                 }
-                return bucketIndex < capacity ? table.get(bucketIndex).iterator() : null;
+                return bucketIndex < capacity ?
+                        table.get(bucketIndex).iterator() :
+                        null;
             }
 
             @Override
             public boolean hasNext() {
-                if (modCount != expectedModCount) throw new ConcurrentModificationException();
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return bucketIterator != null && bucketIterator.hasNext();
             }
 
             @Override
             public Entry<K, V> next() {
-                if (modCount != expectedModCount) throw new ConcurrentModificationException();
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
                 Entry<K, V> next = bucketIterator.next();
                 if (!bucketIterator.hasNext()) {
                     bucketIndex++;
