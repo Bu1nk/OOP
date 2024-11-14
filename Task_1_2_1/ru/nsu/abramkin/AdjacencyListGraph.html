@@ -137,6 +137,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">AdjacencyListGraph</span>
 extends java.lang.Object
 implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></pre>
+<div class="block">Класс для представления графа с использованием списка смежности.</div>
 </li>
 </ul>
 </div>
@@ -158,7 +159,9 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">AdjacencyListGraph</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Конструктор графа с начальной емкостью.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -182,43 +185,59 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addEdge(int,int)">addEdge</a></span>&#8203;(int&nbsp;v1,
        int&nbsp;v2)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Добавляет ребро между двумя вершинами.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addVertex()">addVertex</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Добавляет новую вершину в граф.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;o)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Проверяет равенство двух графов.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;java.lang.Integer&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNeighbors(int)">getNeighbors</a></span>&#8203;(int&nbsp;v)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Возвращает список соседей для заданной вершины.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loadFromFile(java.lang.String)">loadFromFile</a></span>&#8203;(java.lang.String&nbsp;filename)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Загружает граф из файла.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeEdge(int,int)">removeEdge</a></span>&#8203;(int&nbsp;v1,
           int&nbsp;v2)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Удаляет ребро между двумя вершинами.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeVertex(int)">removeVertex</a></span>&#8203;(int&nbsp;v)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Удаляет вершину из графа.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Преобразует граф в строку.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -251,6 +270,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <li class="blockList">
 <h4>AdjacencyListGraph</h4>
 <pre>public&nbsp;AdjacencyListGraph()</pre>
+<div class="block">Конструктор графа с начальной емкостью.</div>
 </li>
 </ul>
 </li>
@@ -270,6 +290,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <li class="blockList">
 <h4>addVertex</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;addVertex()</pre>
+<div class="block">Добавляет новую вершину в граф.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#addVertex()">addVertex</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
@@ -283,9 +304,14 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <li class="blockList">
 <h4>removeVertex</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;removeVertex&#8203;(int&nbsp;v)</pre>
+<div class="block">Удаляет вершину из графа.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#removeVertex(int)">removeVertex</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>v</code> - индекс вершины.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalArgumentException</code> - если вершина не существует.</dd>
 </dl>
 </li>
 </ul>
@@ -297,9 +323,15 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <h4>addEdge</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;addEdge&#8203;(int&nbsp;v1,
                     int&nbsp;v2)</pre>
+<div class="block">Добавляет ребро между двумя вершинами.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#addEdge(int,int)">addEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>v1</code> - индекс первой вершины.</dd>
+<dd><code>v2</code> - индекс второй вершины.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalArgumentException</code> - если одна или обе вершины не существуют.</dd>
 </dl>
 </li>
 </ul>
@@ -311,9 +343,15 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <h4>removeEdge</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;removeEdge&#8203;(int&nbsp;v1,
                        int&nbsp;v2)</pre>
+<div class="block">Удаляет ребро между двумя вершинами.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#removeEdge(int,int)">removeEdge</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>v1</code> - индекс первой вершины.</dd>
+<dd><code>v2</code> - индекс второй вершины.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalArgumentException</code> - если одна или обе вершины не существуют.</dd>
 </dl>
 </li>
 </ul>
@@ -324,9 +362,16 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <li class="blockList">
 <h4>getNeighbors</h4>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;java.lang.Integer&gt;&nbsp;getNeighbors&#8203;(int&nbsp;v)</pre>
+<div class="block">Возвращает список соседей для заданной вершины.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#getNeighbors(int)">getNeighbors</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>v</code> - индекс вершины.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>список индексов соседних вершин.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalArgumentException</code> - если вершина не существует.</dd>
 </dl>
 </li>
 </ul>
@@ -337,9 +382,14 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <li class="blockList">
 <h4>loadFromFile</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;loadFromFile&#8203;(java.lang.String&nbsp;filename)</pre>
+<div class="block">Загружает граф из файла.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#loadFromFile(java.lang.String)">loadFromFile</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>filename</code> - имя файла.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalArgumentException</code> - если файл не найден или содержит ошибки.</dd>
 </dl>
 </li>
 </ul>
@@ -350,11 +400,16 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <li class="blockList">
 <h4>equals</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(java.lang.Object&nbsp;o)</pre>
+<div class="block">Проверяет равенство двух графов.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#equals(java.lang.Object)">equals</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>o</code> - объект для сравнения.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true, если графы равны, иначе false.</dd>
 </dl>
 </li>
 </ul>
@@ -365,11 +420,14 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">Преобразует граф в строку.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Graph.html#toString()">toString</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>строковое представление графа.</dd>
 </dl>
 </li>
 </ul>
