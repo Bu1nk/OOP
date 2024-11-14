@@ -111,4 +111,81 @@ class IncidenceMatrixGraphTest {
         String expectedMatrix = "Incidence Matrix:\n1 -1 \n-1 1 \n";
         assertEquals(expectedMatrix, graph.toString());
     }
+
+    @Test
+    void testAddMultipleVerticesAndEdges() {
+        for (int i = 0; i < 10; i++) {
+            graph.addVertex();
+        }
+        for (int i = 0; i < 5; i++) {
+            graph.addEdge(i, i + 1);
+        }
+        assertEquals(10, graph.vertexCount);
+        assertEquals(5, graph.edgeCount);
+    }
+
+    @Test
+    void testReAddEdgeAfterRemoval() {
+        graph.addVertex();
+        graph.addVertex();
+        graph.addEdge(0, 1);
+        graph.removeEdge(0, 1);
+        assertEquals(0, graph.edgeCount);
+        graph.addEdge(0, 1);
+        assertEquals(1, graph.edgeCount);
+        assertEquals(List.of(1), graph.getNeighbors(0));
+    }
+
+    @Test
+    void testAddVertexAfterRemovingAllEdges() {
+        graph.addVertex();
+        graph.addVertex();
+        graph.addEdge(0, 1);
+        graph.removeEdge(0, 1);
+        graph.addVertex();
+        assertEquals(3, graph.vertexCount);
+        assertEquals(0, graph.edgeCount);
+    }
+
+    @Test
+    void testAddLoopEdge() {
+        graph.addVertex();
+        graph.addEdge(0, 0);
+        assertEquals(1, graph.edgeCount);
+        assertEquals(List.of(0), graph.getNeighbors(0));
+    }
+
+    @Test
+    void testRemoveVertexTwice() {
+        graph.addVertex();
+        graph.addVertex();
+        graph.removeVertex(1);
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.removeVertex(1));
+    }
+
+    @Test
+    void testLoadEmptyFile() {
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.loadFromFile("emptyFile.txt"));
+    }
+
+    @Test
+    void testAddEdgeWithNegativeIndex() {
+        graph.addVertex();
+        graph.addVertex();
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.addEdge(-1, 1));
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.addEdge(0, -1));
+    }
+
+    @Test
+    void testRemoveLoopEdge() {
+        graph.addVertex();
+        graph.addEdge(0, 0);
+        graph.removeEdge(0, 0);
+        assertEquals(0, graph.edgeCount);
+        assertTrue(graph.getNeighbors(0).isEmpty());
+    }
 }

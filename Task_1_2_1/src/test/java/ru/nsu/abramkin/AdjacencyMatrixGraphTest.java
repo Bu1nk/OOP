@@ -120,4 +120,90 @@ class AdjacencyMatrixGraphTest {
         String expectedOutput = "Adjacency Matrix:\n0 1 \n1 0 \n";
         assertEquals(expectedOutput, graph.toString());
     }
+
+    @Test
+    void testAddVertexResizeMatrix() {
+        graph.addVertex();
+        graph.addVertex();
+        graph.addVertex();
+        graph.addVertex();
+        assertEquals(4, graph.vertexCount);
+    }
+
+    @Test
+    void testAddEdgeInvalidVertex() {
+        graph.addVertex();
+        graph.addVertex();
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.addEdge(0, 2));
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.addEdge(-1, 1));
+    }
+
+    @Test
+    void testRemoveEdgeInvalidVertex() {
+        graph.addVertex();
+        graph.addVertex();
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.removeEdge(0, 2));
+    }
+
+    @Test
+    void testLoadFromFileEmptyFile() throws IOException {
+        File emptyFile = File.createTempFile("emptyGraph", ".txt");
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.loadFromFile(emptyFile.getPath()));
+    }
+
+    @Test
+    void testSymmetryOfEdges() {
+        graph.addVertex();
+        graph.addVertex();
+        graph.addEdge(0, 1);
+        assertTrue(graph.hasEdge(0, 1));
+        assertTrue(graph.hasEdge(1, 0));
+
+        graph.removeEdge(0, 1);
+        assertFalse(graph.hasEdge(0, 1));
+        assertFalse(graph.hasEdge(1, 0));
+    }
+
+    @Test
+    void testLoadFromFileIncompleteMatrix() throws IOException {
+        File tempFile = File.createTempFile("incompleteGraph", ".txt");
+        try (FileWriter writer = new FileWriter(tempFile)) {
+            writer.write("3\n0 1\n1 0 1\n");
+        }
+
+        assertThrows(IllegalArgumentException.class,
+                () -> graph.loadFromFile(tempFile.getPath()));
+    }
+
+    @Test
+    void testHasEdgeWithSelfLoop() {
+        graph.addVertex();
+        graph.addEdge(0, 0);
+        assertTrue(graph.hasEdge(0, 0));
+        graph.removeEdge(0, 0);
+        assertFalse(graph.hasEdge(0, 0));
+    }
+
+    @Test
+    void testAddRemoveMultipleEdges() {
+        graph.addVertex();
+        graph.addVertex();
+        graph.addVertex();
+
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
+
+        assertTrue(graph.hasEdge(0, 1));
+        assertTrue(graph.hasEdge(1, 2));
+
+        graph.removeEdge(0, 1);
+        assertFalse(graph.hasEdge(0, 1));
+
+        graph.removeEdge(1, 2);
+        assertFalse(graph.hasEdge(1, 2));
+    }
 }

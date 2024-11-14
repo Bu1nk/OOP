@@ -26,7 +26,10 @@ public class IncidenceMatrixGraph implements Graph {
             int[][] newMatrix = new int[newSize][incidenceMatrix[0].length];
 
             for (int i = 0; i < incidenceMatrix.length; i++) {
-                System.arraycopy(incidenceMatrix[i], 0, newMatrix[i], 0, incidenceMatrix[i].length);
+                System.arraycopy(
+                        incidenceMatrix[i], 0,
+                        newMatrix[i], 0,
+                        incidenceMatrix[i].length);
             }
             incidenceMatrix = newMatrix;
         }
@@ -58,13 +61,19 @@ public class IncidenceMatrixGraph implements Graph {
             int[][] newMatrix = new int[incidenceMatrix.length][newSize];
 
             for (int i = 0; i < incidenceMatrix.length; i++) {
-                System.arraycopy(incidenceMatrix[i], 0, newMatrix[i], 0, incidenceMatrix[i].length);
+                System.arraycopy(incidenceMatrix[i], 0,
+                        newMatrix[i], 0,
+                        incidenceMatrix[i].length);
             }
             incidenceMatrix = newMatrix;
         }
 
-        incidenceMatrix[v1][edgeCount - 1] = 1;
-        incidenceMatrix[v2][edgeCount - 1] = -1;
+        if (v1 == v2) {
+            incidenceMatrix[v1][edgeCount - 1] = 2;
+        } else {
+            incidenceMatrix[v1][edgeCount - 1] = 1;
+            incidenceMatrix[v2][edgeCount - 1] = -1;
+        }
     }
 
     @Override
@@ -76,7 +85,8 @@ public class IncidenceMatrixGraph implements Graph {
         boolean edgeFound = false;
 
         for (int j = 0; j < edgeCount; j++) {
-            if ((incidenceMatrix[v1][j] == 1 && incidenceMatrix[v2][j] == -1) ||
+            if ((v1 == v2 && incidenceMatrix[v1][j] == 2) ||
+                    (incidenceMatrix[v1][j] == 1 && incidenceMatrix[v2][j] == -1) ||
                     (incidenceMatrix[v1][j] == -1 && incidenceMatrix[v2][j] == 1)) {
 
                 for (int i = 0; i < vertexCount; i++) {
@@ -104,6 +114,8 @@ public class IncidenceMatrixGraph implements Graph {
             if (incidenceMatrix[v][j] != 0) {
                 for (int i = 0; i < vertexCount; i++) {
                     if (i != v && incidenceMatrix[i][j] != 0) {
+                        neighbors.add(i);
+                    } else if (i == v && incidenceMatrix[i][j] == 2) {
                         neighbors.add(i);
                     }
                 }
