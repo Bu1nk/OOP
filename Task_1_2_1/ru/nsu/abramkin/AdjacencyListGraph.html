@@ -381,7 +381,8 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <ul class="blockList">
 <li class="blockList">
 <h4>loadFromFile</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;loadFromFile&#8203;(java.lang.String&nbsp;filename)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;loadFromFile&#8203;(java.lang.String&nbsp;filename)
+                  throws java.io.IOException</pre>
 <div class="block">Загружает граф из файла.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -390,6 +391,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.abramkin">Graph</a></
 <dd><code>filename</code> - имя файла.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.lang.IllegalArgumentException</code> - если файл не найден или содержит ошибки.</dd>
+<dd><code>java.io.IOException</code> - если произошла ошибка ввода-вывода при чтении файла.</dd>
 </dl>
 </li>
 </ul>
