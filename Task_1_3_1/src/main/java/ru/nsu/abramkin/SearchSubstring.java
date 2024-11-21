@@ -1,9 +1,8 @@
 package ru.nsu.abramkin;
 
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,17 +30,16 @@ public class SearchSubstring {
         int searchLength = searchString.length();
         int index = 0;
 
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        new FileInputStream(fileName),
-                        StandardCharsets.UTF_8)
-        )) {
-            char[] buffer = new char[1024];
-            StringBuilder window = new StringBuilder();
+        try (BufferedInputStream inputStream = new BufferedInputStream(
+                new FileInputStream(fileName))) {
 
+            byte[] buffer = new byte[1024];
+            StringBuilder window = new StringBuilder();
             int bytesRead;
-            while ((bytesRead = reader.read(buffer)) != -1) {
-                window.append(buffer, 0, bytesRead);
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                String chunk = new String(buffer, 0, bytesRead, StandardCharsets.UTF_8);
+                window.append(chunk);
 
                 int windowIndex;
                 while ((windowIndex = window.indexOf(searchString)) != -1) {
@@ -50,8 +48,8 @@ public class SearchSubstring {
                     index += windowIndex + 1;
                 }
 
-                if (window.length() > searchLength) {
-                    int excessLength = window.length() - searchLength;
+                if (window.length() >= searchLength) {
+                    int excessLength = window.length() - searchLength + 1;
                     window.delete(0, excessLength);
                     index += excessLength;
                 }

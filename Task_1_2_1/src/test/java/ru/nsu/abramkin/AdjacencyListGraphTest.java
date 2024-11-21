@@ -1,5 +1,6 @@
 package ru.nsu.abramkin;
 
+import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -83,7 +84,7 @@ class AdjacencyListGraphTest {
      * Тест загрузки графа из файла.
      */
     @Test
-    void testLoadFromFile() {
+    void testLoadFromFile() throws IOException {
         graph.loadFromFile("testGraphList.txt");
 
         assertEquals(3, graph.vertexCount);

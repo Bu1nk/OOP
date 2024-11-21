@@ -3,6 +3,7 @@ package ru.nsu.abramkin;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -115,6 +116,49 @@ public class SearchSubstringTest {
         List<Integer> result = SearchSubstring.find(
                 tempFile.getAbsolutePath(), "бра");
         assertEquals(List.of(), result, "Ожидается, что 'бра' не найдено в файле");
+    }
+
+    /**
+     * Тест сравнивает результаты работы алгоритма поиска подстроки с
+     * результатами стандартного метода String.indexOf на случайных данных.
+     *
+     * @throws IOException если возникает ошибка записи в файл или чтения из него
+     */
+    @Test
+    public void testRandomStringComparison() throws IOException {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String searchString = "test";
+        int fileLength = 1_000_000;
+
+        StringBuilder randomContent = new StringBuilder(fileLength);
+        for (int i = 0; i < fileLength; i++) {
+            randomContent.append(
+                    alphabet.charAt(
+                            (int) (Math.random() * alphabet.length())));
+        }
+
+        for (int i = 0; i < 100; i++) {
+            int randomIndex = (int) (Math.random()
+                    * (fileLength
+                    - searchString.length()));
+            randomContent.replace(randomIndex,
+                    randomIndex + searchString.length(),
+                    searchString);
+        }
+
+        writeToFile(tempFile, randomContent.toString());
+
+        List<Integer> expectedResults = new ArrayList<>();
+        int index = 0;
+        String content = randomContent.toString();
+        while ((index = content.indexOf(searchString, index)) != -1) {
+            expectedResults.add(index);
+            index += 1;
+        }
+
+        List<Integer> actualResults = SearchSubstring.find(
+                tempFile.getAbsolutePath(), searchString);
+        assertEquals(expectedResults, actualResults);
     }
 
     /**

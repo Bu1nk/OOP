@@ -56,7 +56,8 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public void removeVertex(int v) {
         if (v >= vertexCount || v < 0) {
-            throw new IllegalArgumentException("Вершина не существует");
+            throw new IllegalArgumentException(
+                    String.format("Вершина с номером %d не существует", v));
         }
 
         for (int i = v; i < vertexCount - 1; i++) {
@@ -76,7 +77,9 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public void addEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
-            throw new IllegalArgumentException("Одна или обе вершины не существуют");
+            throw new IllegalArgumentException(
+                    String.format("Одна или обе вершины с номерами %d, %d не существуют",
+                            v1, v2));
         }
 
         edgeCount++;
@@ -111,7 +114,9 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public void removeEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
-            throw new IllegalArgumentException("Одна или обе вершины не существуют");
+            throw new IllegalArgumentException(
+                    String.format("Одна или обе вершины с номерами %d, %d не существуют",
+                            v1, v2));
         }
 
         boolean edgeFound = false;
@@ -145,7 +150,8 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public List<Integer> getNeighbors(int v) {
         if (v >= vertexCount || v < 0) {
-            throw new IllegalArgumentException("Вершина не существует");
+            throw new IllegalArgumentException(
+                    String.format("Вершина с номером %d не существует", v));
         }
 
         List<Integer> neighbors = new ArrayList<>();
