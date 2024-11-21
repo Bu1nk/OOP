@@ -40,7 +40,8 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public void removeVertex(int v) {
         if (v >= vertexCount || v < 0) {
-            throw new IllegalArgumentException("Вершина не существует");
+            throw new IllegalArgumentException(
+                    String.format("Вершина с номером %d не существует", v));
         }
 
         adjacencyList.remove(v);
@@ -70,7 +71,9 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public void addEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
-            throw new IllegalArgumentException("Одна или обе вершины не существуют");
+            throw new IllegalArgumentException(
+                    String.format("Одна или обе вершины с номерами %d, %d не существуют",
+                            v1, v2));
         }
 
         adjacencyList.get(v1).add(v2);
@@ -87,7 +90,9 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public void removeEdge(int v1, int v2) {
         if (v1 >= vertexCount || v2 >= vertexCount || v1 < 0 || v2 < 0) {
-            throw new IllegalArgumentException("Одна или обе вершины не существуют");
+            throw new IllegalArgumentException(
+                    String.format("Одна или обе вершины с номерами %d, %d не существуют",
+                            v1, v2));
         }
 
         adjacencyList.get(v1).remove(Integer.valueOf(v2));
@@ -104,7 +109,8 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public List<Integer> getNeighbors(int v) {
         if (v >= vertexCount || v < 0) {
-            throw new IllegalArgumentException("Вершина не существует");
+            throw new IllegalArgumentException(
+                    String.format("Вершина с номером %d не существует", v));
         }
         return new ArrayList<>(adjacencyList.get(v));
     }
@@ -116,12 +122,15 @@ public class AdjacencyListGraph implements Graph {
      * @throws IllegalArgumentException если файл не найден или содержит ошибки.
      */
     @Override
-    public void loadFromFile(String filename) {
+    public void loadFromFile(String filename) throws IOException{
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-
             String[] firstLine = br.readLine().split(" ");
             int numVertices = Integer.parseInt(firstLine[0]);
             int numEdges = Integer.parseInt(firstLine[1]);
+
+            // Убедимся, что граф из файла загружается с чистого состояния.
+            adjacencyList.clear();
+            vertexCount = 0;
 
             for (int i = 0; i < numVertices; i++) {
                 addVertex();
@@ -134,10 +143,11 @@ public class AdjacencyListGraph implements Graph {
                 int v2 = Integer.parseInt(edge[1]);
                 addEdge(v1, v2);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Ошибка формата файла графа: " + filename, e);
         }
     }
+
 
     /**
      * Проверяет равенство двух графов.
