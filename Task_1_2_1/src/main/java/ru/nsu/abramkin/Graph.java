@@ -63,14 +63,6 @@ public interface Graph {
     void loadFromFile(String filename) throws IOException;
 
     /**
-     * Сравнивает текущий граф с другим объектом.
-     *
-     * @param o объект для сравнения.
-     * @return true, если объекты равны, иначе false.
-     */
-    boolean equals(Object o);
-
-    /**
      * Преобразует граф в строку для текстового представления.
      *
      * @return строковое представление графа.
