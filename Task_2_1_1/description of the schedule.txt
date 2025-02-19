@@ -32,8 +32,8 @@ Sequential - 332.2868
 
 Parallel Threads 4 229.8024
 
-Parallel Threads 8 2.7508
+Parallel Threads 6 2.7508
 
-Parallel Threads 16  2.0533
+Parallel Threads 8 2.0533
 
 Parallel Stream - 79.3222

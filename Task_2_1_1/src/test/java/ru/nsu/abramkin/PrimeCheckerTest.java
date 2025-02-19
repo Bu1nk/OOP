@@ -1,14 +1,15 @@
 package ru.nsu.abramkin;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Unit tests for PrimeChecker class.
+ * Unit tests for the PrimeChecker class.
  */
 public class PrimeCheckerTest {
     /**
-     * Tests sequential method with different cases.
+     * Tests the sequential method with different cases.
      */
     @Test
     void testHasNonPrimeSequential() {
@@ -23,7 +24,8 @@ public class PrimeCheckerTest {
     }
 
     /**
-     * Tests parallel threads method with different cases.
+     * Tests the parallel threads method with different cases.
+     *
      * @throws InterruptedException if execution is interrupted
      */
     @Test
@@ -39,7 +41,7 @@ public class PrimeCheckerTest {
     }
 
     /**
-     * Tests parallel stream method with different cases.
+     * Tests the parallel stream method with different cases.
      */
     @Test
     void testHasNonPrimeParallelStream() {

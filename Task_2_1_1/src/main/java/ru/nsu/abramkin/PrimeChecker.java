@@ -1,7 +1,13 @@
 package ru.nsu.abramkin;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Utility class for checking the presence of non-prime numbers in an array.
@@ -14,7 +20,9 @@ public class PrimeChecker {
      * @return true if the number is prime, false otherwise
      */
     private static boolean isPrime(int num) {
-        if (num < 2) return false;
+        if (num < 2) {
+            return false;
+        }
         for (int i = 2; i * i <= num; i++) {
             if (num % i == 0) {
                 return false;
@@ -46,12 +54,14 @@ public class PrimeChecker {
      * @return true if there is at least one non-prime number, false otherwise
      * @throws InterruptedException if the execution is interrupted
      */
-    public static boolean hasNonPrimeParallelThreads(int[] numbers, int threadCount) throws InterruptedException {
+    public static boolean hasNonPrimeParallelThreads(int[] numbers, int threadCount)
+            throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
         List<Future<Boolean>> results = new ArrayList<>();
 
         for (int num : numbers) {
-            results.add(executor.submit(() -> !isPrime(num)));
+            final int currentNum = num;
+            results.add(executor.submit(() -> !isPrime(currentNum)));
         }
 
         executor.shutdown();
@@ -59,7 +69,9 @@ public class PrimeChecker {
 
         for (Future<Boolean> result : results) {
             try {
-                if (result.get()) return true;
+                if (result.get()) {
+                    return true;
+                }
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
@@ -74,6 +86,8 @@ public class PrimeChecker {
      * @return true if there is at least one non-prime number, false otherwise
      */
     public static boolean hasNonPrimeParallelStream(int[] numbers) {
-        return Arrays.stream(numbers).parallel().anyMatch(num -> !isPrime(num));
+        return Arrays.stream(numbers)
+                .parallel()
+                .anyMatch(num -> !isPrime(num));
     }
 }
