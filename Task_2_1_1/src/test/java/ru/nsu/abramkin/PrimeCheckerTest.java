@@ -1,8 +1,12 @@
 package ru.nsu.abramkin;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org
+        .junit
+        .jupiter
+        .api
+        .Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for the PrimeChecker class.
@@ -33,7 +37,9 @@ public class PrimeCheckerTest {
         assertTrue(PrimeChecker.hasNonPrimeParallelThreads(new int[]{4, 7, 9}, 4));
         assertFalse(PrimeChecker.hasNonPrimeParallelThreads(new int[]{2, 3, 5, 7, 11}, 4));
         assertTrue(PrimeChecker.hasNonPrimeParallelThreads(new int[]{15, 17, 19, 23}, 4));
-        assertFalse(PrimeChecker.hasNonPrimeParallelThreads(new int[]{99999941, 99999959, 99999971}, 4));
+        assertFalse(PrimeChecker.hasNonPrimeParallelThreads(
+                new int[]{99999941, 99999959, 99999971},
+                4));
         assertTrue(PrimeChecker.hasNonPrimeParallelThreads(new int[]{1, 2, 3, 4, 5}, 4));
         assertFalse(PrimeChecker.hasNonPrimeParallelThreads(new int[]{}, 4));
         assertFalse(PrimeChecker.hasNonPrimeParallelThreads(new int[]{17}, 4));
@@ -48,7 +54,8 @@ public class PrimeCheckerTest {
         assertTrue(PrimeChecker.hasNonPrimeParallelStream(new int[]{4, 7, 9}));
         assertFalse(PrimeChecker.hasNonPrimeParallelStream(new int[]{2, 3, 5, 7, 11}));
         assertTrue(PrimeChecker.hasNonPrimeParallelStream(new int[]{15, 17, 19, 23}));
-        assertFalse(PrimeChecker.hasNonPrimeParallelStream(new int[]{99999941, 99999959, 99999971}));
+        assertFalse(PrimeChecker.hasNonPrimeParallelStream(
+                new int[]{99999941, 99999959, 99999971}));
         assertTrue(PrimeChecker.hasNonPrimeParallelStream(new int[]{1, 2, 3, 4, 5}));
         assertFalse(PrimeChecker.hasNonPrimeParallelStream(new int[]{}));
         assertFalse(PrimeChecker.hasNonPrimeParallelStream(new int[]{17}));
