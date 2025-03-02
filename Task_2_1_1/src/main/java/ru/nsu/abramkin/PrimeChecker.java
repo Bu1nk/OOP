@@ -37,7 +37,7 @@ public class PrimeChecker {
      * @param numbers the array of numbers to check
      * @return true if there is at least one non-prime number, false otherwise
      */
-    public static boolean hasNonPrimeSequential(int[] numbers) {
+    public static boolean hasCompositeSequential(int[] numbers) {
         for (int num : numbers) {
             if (!isPrime(num)) {
                 return true;
@@ -54,28 +54,43 @@ public class PrimeChecker {
      * @return true if there is at least one non-prime number, false otherwise
      * @throws InterruptedException if the execution is interrupted
      */
-    public static boolean hasNonPrimeParallelThreads(int[] numbers, int threadCount)
+    public static boolean hasCompositeParallelThreads(int[] numbers, int threadCount)
             throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+        int chunkSize = (int) Math.ceil((double) numbers.length / threadCount);
         List<Future<Boolean>> results = new ArrayList<>();
 
-        for (int num : numbers) {
-            final int currentNum = num;
-            results.add(executor.submit(() -> !isPrime(currentNum)));
+        for (int i = 0; i < threadCount; i++) {
+            final int start = i * chunkSize;
+            final int end = Math.min(start + chunkSize, numbers.length);
+
+            if (start >= end) break; // Если больше нечего обрабатывать, выходим
+
+            results.add(executor.submit(() -> {
+                for (int j = start; j < end; j++) {
+                    if (!isPrime(numbers[j])) {
+                        return true;
+                    }
+                }
+                return false;
+            }));
         }
 
         executor.shutdown();
+
+        // Ожидаем завершения всех задач
         executor.awaitTermination(1, TimeUnit.MINUTES);
 
         for (Future<Boolean> result : results) {
             try {
                 if (result.get()) {
-                    return true;
+                    return true; // Если хотя бы одна часть содержит составное число
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
         }
+
         return false;
     }
 
@@ -85,7 +100,7 @@ public class PrimeChecker {
      * @param numbers the array of numbers to check
      * @return true if there is at least one non-prime number, false otherwise
      */
-    public static boolean hasNonPrimeParallelStream(int[] numbers) {
+    public static boolean hasCompositeParallelStream(int[] numbers) {
         return Arrays.stream(numbers)
                 .parallel()
                 .anyMatch(num -> !isPrime(num));
