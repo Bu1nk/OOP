@@ -3,32 +3,33 @@ package ru.nsu.abramkin;
 import java.util.Queue;
 
 public class Baker extends Thread {
-    private final int id;
+    private final int bakerId;
     private final int speed;
-    private final Queue<Order> orderQueue;
     private final Storage storage;
+    private final Queue<Order> orderQueue;
 
-    public Baker(int id, int speed, Queue<Order> orderQueue, Storage storage) {
-        this.id = id;
+    public Baker(int bakerId, int speed, Storage storage, Queue<Order> orderQueue) {
+        this.bakerId = bakerId;
         this.speed = speed;
-        this.orderQueue = orderQueue;
         this.storage = storage;
+        this.orderQueue = orderQueue;
     }
 
+    @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            Order order;
-            synchronized (orderQueue) {
-                if (orderQueue.isEmpty()) continue;
-                order = orderQueue.poll();
+        try {
+            while (true) {
+                Order order;
+                synchronized (orderQueue) {
+                    if (orderQueue.isEmpty()) break;
+                    order = orderQueue.poll();
+                }
+                System.out.println("[Заказ " + order.id + "] Готовится пекарем " + bakerId);
+                Thread.sleep(speed * 1000L);
+                storage.put(order);
             }
-            try {
-                System.out.println(order.getId() + " Готовится пекарем " + id);
-                Thread.sleep(speed * 1000);
-                storage.store(order);
-            } catch (InterruptedException e) {
-                break;
-            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

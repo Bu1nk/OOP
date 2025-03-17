@@ -1,76 +1,42 @@
 package ru.nsu.abramkin;
 
-import java.util.concurrent.*;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class Pizzeria {
+    private final List<Baker> bakers = new LinkedList<>();
+    private final List<Courier> couriers = new LinkedList<>();
     private final Queue<Order> orderQueue = new LinkedList<>();
     private final Storage storage;
-    private final List<Baker> bakers = new ArrayList<>();
-    private final List<Courier> couriers = new ArrayList<>();
-    private final ExecutorService executorService;
-    private final int workingTime;
-    private boolean isOpen = true;
 
-    public Pizzeria(int bakersCount, int couriersCount, int storageSize, int workingTime, int[] bakerSpeeds, int[] courierCapacities) {
-        this.storage = new Storage(storageSize);
-        this.workingTime = workingTime;
-        this.executorService = Executors.newCachedThreadPool();
+    public Pizzeria(Config config) {
+        this.storage = new Storage(config.getStorageCapacity());
 
-        for (int i = 0; i < bakersCount; i++) {
-            bakers.add(new Baker(i + 1, bakerSpeeds[i], orderQueue, storage));
+        int bakerId = 1;
+        for (int speed : config.getBakerSpeeds()) {
+            bakers.add(new Baker(bakerId++, speed, storage, orderQueue));
         }
-        for (int i = 0; i < couriersCount; i++) {
-            couriers.add(new Courier(i + 1, courierCapacities[i], storage));
+
+        int courierId = 1;
+        for (int cap : config.getCourierCapacities()) {
+            couriers.add(new Courier(courierId++, cap, storage, orderQueue));
         }
     }
 
-    public void start() {
-        System.out.println("Пиццерия открыта!");
-
+    public void startSimulation(int orderCount) {
+        for (int i = 0; i < orderCount; i++) {
+            orderQueue.add(new Order());
+        }
+        bakers.forEach(Thread::start);
+        couriers.forEach(Thread::start);
         for (Baker baker : bakers) {
-            executorService.submit(baker);
+            try {
+                baker.join();
+            } catch (InterruptedException ignored) {}
         }
         for (Courier courier : couriers) {
-            executorService.submit(courier);
-        }
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                close();
-            }
-        }, workingTime * 1000);
-    }
-
-    public synchronized void addOrder(Order order) {
-        if (isOpen) {
-            orderQueue.add(order);
-            System.out.println("Заказ " + order.getId() + " добавлен в очередь.");
-            notifyAll();
-        }
-    }
-
-    public synchronized void close() {
-        isOpen = false;
-        System.out.println("Пиццерия закрывается! Завершаем заказы...");
-        executorService.shutdown();
-    }
-
-    public static void main(String[] args) {
-        ConfigLoader config = ConfigLoader.loadConfig("config.json");
-        Pizzeria pizzeria = new Pizzeria(config.getBakersCount(), config.getCouriersCount(), config.getStorageSize(),
-                config.getWorkingTime(), config.getBakerSpeeds(), config.getCourierCapacities());
-
-        pizzeria.start();
-
-        for (int i = 1; i <= 20; i++) {
-            pizzeria.addOrder(new Order(i));
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+            courier.interrupt();
         }
     }
 }
