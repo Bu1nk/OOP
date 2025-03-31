@@ -4,11 +4,10 @@ package ru.nsu.abramkin;
  * Represents a baker. The baker takes orders from the queue, prepares them, and places them in the delivery queue.
  */
 public class Baker implements Runnable {
-
-    private final int id;
-    private final int speed;
     private final QueueOrder<Order> orderQueue;
     private final QueueOrder<Order> deliveryOrderQueue;
+    private final int id;
+    private final int speed;
 
     /**
      * Constructor for the Baker class.

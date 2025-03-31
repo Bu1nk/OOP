@@ -23,6 +23,20 @@ class QueueOrderTest {
     }
 
     /**
+     * Additional test to verify that the queue can still retrieve items when closed, if they were added before closure.
+     *
+     * @throws InterruptedException if the thread is interrupted during execution.
+     */
+    @Test
+    void testGetFromClosedQueue() throws InterruptedException {
+        QueueOrder<Integer> queue = new QueueOrder<>(2);
+        queue.insert(1);
+        queue.close();
+
+        assertEquals(1, queue.get());
+    }
+
+    /**
      * Test method to verify the queue capacity.
      */
     @Test

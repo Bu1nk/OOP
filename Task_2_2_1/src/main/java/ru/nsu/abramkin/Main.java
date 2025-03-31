@@ -85,16 +85,16 @@ public class Main {
         }
     }
 
-    private static void readPizzeriaData() throws IOException, ParseException {
+    static void readPizzeriaData() throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader("data.json"));
         JSONObject jo = (JSONObject) obj;
 
-        orderCount = ((Long) jo.get("orderCount")).intValue();
-        bakerCount = ((Long) jo.get("bakerCount")).intValue();
-        courierCount = ((Long) jo.get("courierCount")).intValue();
-        warehouseCap = ((Long) jo.get("warehouseCap")).intValue();
         timeBetweenOrders = ((Long) jo.get("timeBetweenOrders")).intValue();
         timeAfterAllOrders = ((Long) jo.get("timeAfterAllOrders")).intValue();
+        courierCount = ((Long) jo.get("courierCount")).intValue();
+        warehouseCap = ((Long) jo.get("warehouseCap")).intValue();
+        orderCount = ((Long) jo.get("orderCount")).intValue();
+        bakerCount = ((Long) jo.get("bakerCount")).intValue();
 
         JSONArray bSpeed = (JSONArray) jo.get("bakerSpeed");
         for (Object speed : bSpeed) {

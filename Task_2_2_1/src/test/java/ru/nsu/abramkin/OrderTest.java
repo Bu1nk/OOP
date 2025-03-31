@@ -20,6 +20,32 @@ class OrderTest {
     }
 
     /**
+     * Additional test to verify the behavior when an order's status is set to a null value.
+     * This ensures that the status can be updated to null without causing issues.
+     */
+    @Test
+    void testSetNullStatus() {
+        Order order = new Order(1, "Pending");
+        order.setNewStatus(null);
+        assertEquals(null, order.getStatus());
+    }
+
+    /**
+     * Additional test to check if the Order ID is properly assigned.
+     * This verifies that the ID is immutable after initialization.
+     */
+    @Test
+    void testOrderIdImmutability() {
+        Order order = new Order(1, "Pending");
+        int id = order.getId();
+
+        // Order ID should remain constant
+        assertEquals(1, id);
+        order.setNewStatus("Processing");
+        assertEquals(1, order.getId());  // ID should remain unchanged
+    }
+
+    /**
      * Test method for setting a new status for an order.
      */
     @Test
