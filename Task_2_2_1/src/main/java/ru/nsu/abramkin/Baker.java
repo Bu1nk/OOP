@@ -1,35 +1,51 @@
 package ru.nsu.abramkin;
 
-import java.util.Queue;
+/**
+ * Represents a baker. The baker takes orders from the queue, prepares them, and places them in the delivery queue.
+ */
+public class Baker implements Runnable {
 
-public class Baker extends Thread {
-    private final int bakerId;
+    private final int id;
     private final int speed;
-    private final Storage storage;
-    private final Queue<Order> orderQueue;
+    private final QueueOrder<Order> orderQueue;
+    private final QueueOrder<Order> deliveryOrderQueue;
 
-    public Baker(int bakerId, int speed, Storage storage, Queue<Order> orderQueue) {
-        this.bakerId = bakerId;
+    /**
+     * Constructor for the Baker class.
+     *
+     * @param id                  Unique baker identifier.
+     * @param speed               Order preparation speed (in seconds).
+     * @param orderQueue          Queue of orders for preparation.
+     * @param deliveryOrderQueue  Queue of orders for delivery.
+     */
+    public Baker(int id, int speed, QueueOrder<Order> orderQueue,
+                 QueueOrder<Order> deliveryOrderQueue) {
+        this.id = id;
         this.speed = speed;
-        this.storage = storage;
         this.orderQueue = orderQueue;
+        this.deliveryOrderQueue = deliveryOrderQueue;
     }
 
+    /**
+     * Main method of the baker's work. The baker takes orders from the queue, prepares them, and places them in the delivery queue.
+     */
     @Override
     public void run() {
         try {
+            Order curOrder;
             while (true) {
-                Order order;
-                synchronized (orderQueue) {
-                    if (orderQueue.isEmpty()) break;
-                    order = orderQueue.poll();
+                curOrder = orderQueue.get();
+                if (curOrder == null) {
+                    System.out.println("Baker " + this.id + " has finished work");
+                    return;
                 }
-                System.out.println("[Заказ " + order.id + "] Готовится пекарем " + bakerId);
+                System.out.println(this.id + " [BAKING_STARTED]");
                 Thread.sleep(speed * 1000L);
-                storage.put(order);
+                deliveryOrderQueue.insert(curOrder);
+                System.out.println(this.id + " [BAKING_FINISHED]");
             }
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
     }
 }

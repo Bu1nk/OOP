@@ -1,0 +1,22 @@
+{
+  "orderCount":3,
+  "bakerCount":4,
+  "courierCount":2,
+  "warehouseCap":2,
+  "timeBetweenOrders":1,
+  "timeAfterAllOrders":5,
+  "bakerSpeed":[
+    3,
+    1,
+    1,
+    2
+  ],
+  "courierCap":[
+    2,
+    5
+  ],
+  "courierSpeed":[
+    3,
+    7
+  ]
+}
