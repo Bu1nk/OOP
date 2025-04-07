@@ -7,9 +7,9 @@ import java.util.Queue;
  * A thread-safe queue with limited capacity.
  */
 public class OrderQueue<T> {
-    Queue<T> queue = new LinkedList<>();
-    int capacity;
-    boolean isClosed = false;
+    private final Queue<T> queue = new LinkedList<>();
+    private final int capacity;
+    private boolean isClosed = false;
 
     /**
      * Constructor for QueueOrder.

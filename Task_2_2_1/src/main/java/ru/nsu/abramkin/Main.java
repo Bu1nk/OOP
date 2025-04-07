@@ -45,7 +45,7 @@ public class Main {
         OrderQueue<Order> deliveryOrderQueue = new OrderQueue<>(warehouseCap);
 
         createAndRunBakers(orderQueue, deliveryOrderQueue);
-        createAndRunCourier(deliveryOrderQueue);
+        createAndRunCouriers(deliveryOrderQueue);
 
         for (int i = 0; i < orderCount; i++) {
             Order newOrder = new Order(i, "Prepare for baking");
@@ -66,11 +66,11 @@ public class Main {
 
     }
 
-    private static void createAndRunCourier(OrderQueue<Order> deliveryOrderQueue) {
+    private static void createAndRunCouriers(OrderQueue<Order> deliveryOrderQueue) {
         for (int i = 0; i < courierCount; i++) {
-            Courier oneCourier = new Courier(i, courierCap.get(i),
+            Courier courier = new Courier(i, courierCap.get(i),
                     courierSpeed.get(i), deliveryOrderQueue);
-            Thread oneCourierThread = new Thread(oneCourier);
+            Thread oneCourierThread = new Thread(courier);
             courierThreads.add(oneCourierThread);
             oneCourierThread.start();
         }
