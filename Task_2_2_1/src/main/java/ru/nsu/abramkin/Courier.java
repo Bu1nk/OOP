@@ -10,7 +10,7 @@ public class Courier implements Runnable {
     private final int id;
     private final int cap;
     private final int speed;
-    private final QueueOrder<Order> orderQueue;
+    private final OrderQueue<Order> orderQueue;
 
     /**
      * Constructor for the Courier class.
@@ -20,7 +20,7 @@ public class Courier implements Runnable {
      * @param speed               Delivery speed (in seconds).
      * @param deliveryOrderQueue  Queue of orders for delivery.
      */
-    public Courier(int id, int cap, int speed, QueueOrder<Order> deliveryOrderQueue) {
+    public Courier(int id, int cap, int speed, OrderQueue<Order> deliveryOrderQueue) {
         this.id = id;
         this.cap = cap;
         this.speed = speed;
@@ -35,7 +35,7 @@ public class Courier implements Runnable {
         try {
             int size = 0;
             List<Integer> orders = new ArrayList<>();
-            while (!orderQueue.isClosed() || (orderQueue.isClosed() && orderQueue.getSize() != 0)
+            while (!orderQueue.isClosed() || orderQueue.getSize() != 0 || size != 0
                     || (orderQueue.isClosed() && size != 0)) {
                 Order order = orderQueue.see();
                 if (size == 0 && order == null) {

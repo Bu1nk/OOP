@@ -26,7 +26,7 @@ class OrderTest {
     @Test
     void testSetNullStatus() {
         Order order = new Order(1, "Pending");
-        order.setNewStatus(null);
+        order.setStatus(null);
         assertEquals(null, order.getStatus());
     }
 
@@ -41,7 +41,7 @@ class OrderTest {
 
         // Order ID should remain constant
         assertEquals(1, id);
-        order.setNewStatus("Processing");
+        order.setStatus("Processing");
         assertEquals(1, order.getId());  // ID should remain unchanged
     }
 
@@ -51,7 +51,7 @@ class OrderTest {
     @Test
     void testSetNewStatus() {
         Order order = new Order(1, "Pending");
-        order.setNewStatus("Processing");
+        order.setStatus("Processing");
         assertEquals("Processing", order.getStatus());
     }
 }

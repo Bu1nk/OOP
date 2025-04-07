@@ -15,7 +15,7 @@ class CourierTest {
      */
     @Test
     void testCourierRun() throws InterruptedException {
-        QueueOrder<Order> deliveryQueue = new QueueOrder<>(10);
+        OrderQueue<Order> deliveryQueue = new OrderQueue<>(10);
         Courier courier = new Courier(1, 2, 1, deliveryQueue);
 
         Thread courierThread = new Thread(courier);
@@ -37,7 +37,7 @@ class CourierTest {
      */
     @Test
     void testCourierWaitsWhenQueueIsEmpty() throws InterruptedException {
-        QueueOrder<Order> deliveryQueue = new QueueOrder<>(10);
+        OrderQueue<Order> deliveryQueue = new OrderQueue<>(10);
         Courier courier = new Courier(1, 2, 1, deliveryQueue);
 
         Thread courierThread = new Thread(courier);

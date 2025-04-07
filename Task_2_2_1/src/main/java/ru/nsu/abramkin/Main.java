@@ -41,8 +41,8 @@ public class Main {
 
         readPizzeriaData();
 
-        QueueOrder<Order> orderQueue = new QueueOrder<>(orderCount);
-        QueueOrder<Order> deliveryOrderQueue = new QueueOrder<>(warehouseCap);
+        OrderQueue<Order> orderQueue = new OrderQueue<>(orderCount);
+        OrderQueue<Order> deliveryOrderQueue = new OrderQueue<>(warehouseCap);
 
         createAndRunBakers(orderQueue, deliveryOrderQueue);
         createAndRunCourier(deliveryOrderQueue);
@@ -66,7 +66,7 @@ public class Main {
 
     }
 
-    private static void createAndRunCourier(QueueOrder<Order> deliveryOrderQueue) {
+    private static void createAndRunCourier(OrderQueue<Order> deliveryOrderQueue) {
         for (int i = 0; i < courierCount; i++) {
             Courier oneCourier = new Courier(i, courierCap.get(i),
                     courierSpeed.get(i), deliveryOrderQueue);
@@ -76,7 +76,7 @@ public class Main {
         }
     }
 
-    private static void createAndRunBakers(QueueOrder<Order> orderQueue, QueueOrder<Order> deliveryOrderQueue) {
+    private static void createAndRunBakers(OrderQueue<Order> orderQueue, OrderQueue<Order> deliveryOrderQueue) {
         for (int i = 0; i < bakerCount; i++) {
             Baker oneBaker = new Baker(i, bakerSpeed.get(i), orderQueue, deliveryOrderQueue);
             Thread oneBakerThread = new Thread(oneBaker);

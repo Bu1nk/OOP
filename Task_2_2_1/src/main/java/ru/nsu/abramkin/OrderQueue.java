@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * A thread-safe queue with limited capacity.
  */
-public class QueueOrder<T> {
+public class OrderQueue<T> {
     Queue<T> queue = new LinkedList<>();
     int capacity;
     boolean isClosed = false;
@@ -16,7 +16,7 @@ public class QueueOrder<T> {
      *
      * @param capacity Maximum queue capacity.
      */
-    public QueueOrder(int capacity) {
+    public OrderQueue(int capacity) {
         this.capacity = capacity;
     }
 

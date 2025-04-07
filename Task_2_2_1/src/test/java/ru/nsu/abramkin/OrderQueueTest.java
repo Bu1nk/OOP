@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for the QueueOrder class.
  */
-class QueueOrderTest {
+class OrderQueueTest {
 
     /**
      * Test method for inserting and getting elements from the queue.
      */
     @Test
     void testInsertAndGet() throws InterruptedException {
-        QueueOrder<Integer> queue = new QueueOrder<>(5);
+        OrderQueue<Integer> queue = new OrderQueue<>(5);
         queue.insert(1);
         queue.insert(2);
         assertEquals(1, queue.get());
@@ -29,7 +29,7 @@ class QueueOrderTest {
      */
     @Test
     void testGetFromClosedQueue() throws InterruptedException {
-        QueueOrder<Integer> queue = new QueueOrder<>(2);
+        OrderQueue<Integer> queue = new OrderQueue<>(2);
         queue.insert(1);
         queue.close();
 
@@ -41,7 +41,7 @@ class QueueOrderTest {
      */
     @Test
     void testQueueCapacity() throws InterruptedException {
-        QueueOrder<Integer> queue = new QueueOrder<>(2);
+        OrderQueue<Integer> queue = new OrderQueue<>(2);
         queue.insert(1);
         queue.insert(2);
         Thread thread = new Thread(() -> {
@@ -61,7 +61,7 @@ class QueueOrderTest {
      */
     @Test
     void testCloseQueue() throws InterruptedException {
-        QueueOrder<Integer> queue = new QueueOrder<>(2);
+        OrderQueue<Integer> queue = new OrderQueue<>(2);
         queue.close();
         assertNull(queue.get());
     }

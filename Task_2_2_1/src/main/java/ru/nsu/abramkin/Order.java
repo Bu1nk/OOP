@@ -23,7 +23,7 @@ public class Order {
      *
      * @param newStatus New order status.
      */
-    public synchronized void setNewStatus(String newStatus) {
+    public synchronized void setStatus(String newStatus) {
         this.status = newStatus;
     }
 
