@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="ru.nsu.abramkin.controller.GameController">
+
+    <AnchorPane>
+        <Canvas fx:id="canvas" layoutX="0" layoutY="0"/>
+    </AnchorPane>
+
+    <VBox fx:id="endOverlay" alignment="CENTER" spacing="15"
+          visible="false"
+          style="-fx-background-color: rgba(0, 0, 0, 0.5);"
+          maxWidth="Infinity" maxHeight="Infinity"
+          prefWidth="1000" prefHeight="1000">
+
+        <Label fx:id="statusLabel" style="-fx-font-size: 30px; -fx-text-fill: white;" />
+        <HBox spacing="20" alignment="CENTER">
+            <Button text="Перезапуск" onAction="#restartGame"/>
+            <Button text="Настройки" onAction="#goToSettings"/>
+        </HBox>
+    </VBox>
+
+</StackPane>
