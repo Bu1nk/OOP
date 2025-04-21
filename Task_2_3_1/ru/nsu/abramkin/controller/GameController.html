@@ -77,6 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameController</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Контроллер основного игрового экрана.
+ Управляет игровым циклом, отрисовкой, вводом и завершением игры.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -109,7 +111,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;cols,
  int&nbsp;foodCount,
  int&nbsp;winLength)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Инициализирует игру с заданными параметрами.</div>
+</div>
 </div>
 </div>
 </div>
@@ -148,6 +152,15 @@ loadScripts(document, 'script');</script>
  int&nbsp;cols,
  int&nbsp;foodCount,
  int&nbsp;winLength)</span></div>
+<div class="block">Инициализирует игру с заданными параметрами.
+ Настраивает модель, запускает игровой цикл и фокус на canvas.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rows</code> - количество строк игрового поля</dd>
+<dd><code>cols</code> - количество столбцов</dd>
+<dd><code>foodCount</code> - количество еды на поле</dd>
+<dd><code>winLength</code> - длина змейки для победы</dd>
+</dl>
 </section>
 </li>
 </ul>

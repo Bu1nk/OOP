@@ -77,6 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameConfigController</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Контроллер для экрана конфигурации игры.
+ Обрабатывает ввод пользователя и запускает игру с заданными параметрами.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -109,7 +111,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;cols,
  int&nbsp;food,
  int&nbsp;winLength)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Проверяет, являются ли заданные параметры конфигурации допустимыми.</div>
+</div>
 </div>
 </div>
 </div>
@@ -148,6 +152,16 @@ loadScripts(document, 'script');</script>
  int&nbsp;cols,
  int&nbsp;food,
  int&nbsp;winLength)</span></div>
+<div class="block">Проверяет, являются ли заданные параметры конфигурации допустимыми.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rows</code> - количество строк поля (5–30)</dd>
+<dd><code>cols</code> - количество столбцов поля (5–30)</dd>
+<dd><code>food</code> - количество еды (1–16)</dd>
+<dd><code>winLength</code> - длина змейки для победы (2–rows*cols)</dd>
+<dt>Returns:</dt>
+<dd>true, если конфигурация валидна; false — в противном случае</dd>
+</dl>
 </section>
 </li>
 </ul>

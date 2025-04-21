@@ -77,6 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Snake</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс, представляющий змейку в игре. Хранит её тело, текущее направление и управляет движением.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +90,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(javafx.geometry.Point2D)" class="member-name-link">Snake</a><wbr>(javafx.geometry.Point2D&nbsp;startPosition)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создаёт змейку, помещая голову в начальную позицию.</div>
+</div>
 </div>
 </section>
 </li>
@@ -115,13 +118,19 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isColliding(javafx.geometry.Point2D)" class="member-name-link">isColliding</a><wbr>(javafx.geometry.Point2D&nbsp;point)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет, занимает ли змейка указанную точку.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#move(boolean)" class="member-name-link">move</a><wbr>(boolean&nbsp;grow)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Двигает змейку в текущем направлении.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDirection(ru.nsu.abramkin.model.Direction)" class="member-name-link">setDirection</a><wbr>(<a href="Direction.html" title="enum class in ru.nsu.abramkin.model">Direction</a>&nbsp;direction)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Устанавливает новое направление, если оно не противоположно текущему.</div>
+</div>
 </div>
 </div>
 </div>
@@ -143,6 +152,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(javafx.geometry.Point2D)">
 <h3>Snake</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Snake</span><wbr><span class="parameters">(javafx.geometry.Point2D&nbsp;startPosition)</span></div>
+<div class="block">Создаёт змейку, помещая голову в начальную позицию.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>startPosition</code> - начальная позиция головы змейки</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -157,36 +171,65 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getHead()">
 <h3>getHead</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">javafx.geometry.Point2D</span>&nbsp;<span class="element-name">getHead</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>позиция головы змейки</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getBody()">
 <h3>getBody</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Deque.html" title="class or interface in java.util" class="external-link">Deque</a>&lt;javafx.geometry.Point2D&gt;</span>&nbsp;<span class="element-name">getBody</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>текущее тело змейки в виде очереди точек (от головы к хвосту)</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setDirection(ru.nsu.abramkin.model.Direction)">
 <h3>setDirection</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDirection</span><wbr><span class="parameters">(<a href="Direction.html" title="enum class in ru.nsu.abramkin.model">Direction</a>&nbsp;direction)</span></div>
+<div class="block">Устанавливает новое направление, если оно не противоположно текущему.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>direction</code> - новое направление движения</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="move(boolean)">
 <h3>move</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">move</span><wbr><span class="parameters">(boolean&nbsp;grow)</span></div>
+<div class="block">Двигает змейку в текущем направлении. Если <code>grow == true</code>, хвост не удаляется.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>grow</code> - указывает, должна ли змейка вырасти (например, после съедания еды)</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isColliding(javafx.geometry.Point2D)">
 <h3>isColliding</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isColliding</span><wbr><span class="parameters">(javafx.geometry.Point2D&nbsp;point)</span></div>
+<div class="block">Проверяет, занимает ли змейка указанную точку.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>point</code> - точка для проверки</dd>
+<dt>Returns:</dt>
+<dd><code>true</code>, если точка входит в тело змейки</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getDirection()">
 <h3>getDirection</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Direction.html" title="enum class in ru.nsu.abramkin.model">Direction</a></span>&nbsp;<span class="element-name">getDirection</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>текущее направление движения змейки</dd>
+</dl>
 </section>
 </li>
 </ul>

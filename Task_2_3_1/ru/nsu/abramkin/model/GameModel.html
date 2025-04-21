@@ -77,6 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameModel</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Модель игры "Змейка". Управляет логикой игры: движением змейки, генерацией еды,
+ проверкой условий победы и проигрыша.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,7 +94,9 @@ loadScripts(document, 'script');</script>
  int&nbsp;cols,
  int&nbsp;foodCount,
  int&nbsp;maxLength)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создаёт игровую модель с указанными параметрами.</div>
+</div>
 </div>
 </section>
 </li>
@@ -127,7 +131,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update()" class="member-name-link">update</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Обновляет состояние игры: двигает змейку, проверяет столкновения и еду.</div>
+</div>
 </div>
 </div>
 </div>
@@ -152,6 +158,14 @@ loadScripts(document, 'script');</script>
  int&nbsp;cols,
  int&nbsp;foodCount,
  int&nbsp;maxLength)</span></div>
+<div class="block">Создаёт игровую модель с указанными параметрами.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rows</code> - количество строк игрового поля</dd>
+<dd><code>cols</code> - количество столбцов игрового поля</dd>
+<dd><code>foodCount</code> - количество единиц еды, размещаемых на поле</dd>
+<dd><code>maxLength</code> - длина змейки, при которой наступает победа</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -166,42 +180,71 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getSnake()">
 <h3>getSnake</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Snake.html" title="class in ru.nsu.abramkin.model">Snake</a></span>&nbsp;<span class="element-name">getSnake</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>объект змейки</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getFood()">
 <h3>getFood</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;javafx.geometry.Point2D&gt;</span>&nbsp;<span class="element-name">getFood</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>список точек, где расположена еда</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="update()">
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">update</span>()</div>
+<div class="block">Обновляет состояние игры: двигает змейку, проверяет столкновения и еду.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если игра продолжается; <code>false</code>, если наступил проигрыш</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isVictory()">
 <h3>isVictory</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isVictory</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если длина змейки достигла победного значения</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getRows()">
 <h3>getRows</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getRows</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>количество строк игрового поля</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getCols()">
 <h3>getCols</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getCols</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>количество столбцов игрового поля</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getWinLength()">
 <h3>getWinLength</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getWinLength</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>длина змейки, необходимая для победы</dd>
+</dl>
 </section>
 </li>
 </ul>
