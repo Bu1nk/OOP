@@ -38,4 +38,28 @@ class GameConfigControllerTest {
         assertTrue(GameConfigController.isValidConfig(5, 5, 1, 2));
         assertTrue(GameConfigController.isValidConfig(30, 30, 16, 900));
     }
+
+    @Test
+    void testNegativeValues() {
+        assertFalse(GameConfigController.isValidConfig(-10, 10, 3, 20));
+        assertFalse(GameConfigController.isValidConfig(10, -10, 3, 20));
+        assertFalse(GameConfigController.isValidConfig(10, 10, -1, 20));
+        assertFalse(GameConfigController.isValidConfig(10, 10, 3, -5));
+    }
+
+    @Test
+    void testWinLengthTooLargeForField() {
+        // Например, длина победы больше количества ячеек
+        assertFalse(GameConfigController.isValidConfig(5, 5, 3, 26)); // 25 ячеек
+    }
+
+    @Test
+    void testTooMuchFoodForFieldSize() {
+        assertFalse(GameConfigController.isValidConfig(3, 3, 10, 5)); // всего 9 ячеек
+    }
+
+    @Test
+    void testFoodAndWinLengthTooBigTogether() {
+        assertTrue(GameConfigController.isValidConfig(5, 5, 10, 20)); // 10+20 = 30 > 25
+    }
 }
