@@ -1,18 +1,18 @@
 package ru.nsu.abramkin.controller;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
-import ru.nsu.abramkin.model.*;
-import javafx.scene.control.Label;
+import ru.nsu.abramkin.model.Direction;
+
 import java.util.ArrayList;
+
+import static ru.nsu.abramkin.Main.gameService;
 
 /**
  * Контроллер основного игрового экрана.
@@ -23,11 +23,12 @@ public class GameController {
     @FXML Label statusLabel;
     @FXML VBox endOverlay;
 
-    private int rows, cols, foodCount, winLength;
+    private int rows;
+    private int cols;
+    private int foodCount;
+    private int winLength;
 
     private final int CELL_SIZE = 20;
-    private GameModel model;
-    private Timeline timeline;
 
     /**
      * Инициализирует игру с заданными параметрами.
@@ -44,10 +45,7 @@ public class GameController {
         this.foodCount = foodCount;
         this.winLength = winLength;
 
-        model = new GameModel(rows, cols, foodCount, winLength);
-        timeline = new Timeline(new KeyFrame(Duration.millis(200), e -> gameLoop()));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        gameService.initGame(rows, cols, foodCount, winLength);
 
         endOverlay.setVisible(false);
         canvas.setFocusTraversable(true);
@@ -62,24 +60,10 @@ public class GameController {
      */
     private void handleKey(KeyEvent e) {
         switch (e.getCode()) {
-            case UP, W -> model.getSnake().setDirection(Direction.UP);
-            case DOWN, S -> model.getSnake().setDirection(Direction.DOWN);
-            case LEFT, A -> model.getSnake().setDirection(Direction.LEFT);
-            case RIGHT, D -> model.getSnake().setDirection(Direction.RIGHT);
-        }
-    }
-
-    /**
-     * Основной игровой цикл.
-     * Обновляет модель, проверяет условия завершения и перерисовывает поле.
-     */
-    private void gameLoop() {
-        boolean alive = model.update();
-        draw();
-        if (!alive) {
-            endGame("Game Over!");
-        } else if (model.isVictory()) {
-            endGame("You Win!");
+            case UP, W -> gameService.setDirection(Direction.UP);
+            case DOWN, S -> gameService.setDirection(Direction.DOWN);
+            case LEFT, A -> gameService.setDirection(Direction.LEFT);
+            case RIGHT, D -> gameService.setDirection(Direction.RIGHT);
         }
     }
 
@@ -88,8 +72,8 @@ public class GameController {
      *
      * @param message текст сообщения о завершении
      */
-    private void endGame(String message) {
-        timeline.stop();
+    public void endGame(String message) {
+        gameService.stop();
         statusLabel.setText(message);
         endOverlay.setVisible(true);
     }
@@ -105,7 +89,7 @@ public class GameController {
     /**
      * Отрисовывает текущее состояние поля, змейки и еды.
      */
-    private void draw() {
+    public void draw() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -122,7 +106,7 @@ public class GameController {
             gc.strokeLine(0, y * CELL_SIZE, canvas.getWidth(), y * CELL_SIZE);
         }
 
-        var body = new ArrayList<>(model.getSnake().getBody());
+        var body = new ArrayList<>(gameService.getModel().getSnake().getBody());
 
         for (int i = 0; i < body.size(); i++) {
             Point2D part = body.get(i);
@@ -137,7 +121,7 @@ public class GameController {
         }
 
         gc.setFill(Color.RED);
-        for (var food : model.getFood()) {
+        for (var food : gameService.getModel().getFood()) {
             gc.fillOval(food.getX() * CELL_SIZE, food.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
     }

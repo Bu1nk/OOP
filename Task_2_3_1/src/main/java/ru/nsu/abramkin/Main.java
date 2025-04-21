@@ -4,13 +4,19 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ru.nsu.abramkin.controller.GameConfigController;
 import ru.nsu.abramkin.controller.GameController;
+import ru.nsu.abramkin.service.ConfigService;
+import ru.nsu.abramkin.service.GameService;
 
 /**
  * Главный класс JavaFX-приложения. Отвечает за запуск и переключение между сценами.
  */
 public class Main extends Application {
     private static Stage primaryStage;
+
+    public static final ConfigService configService = new ConfigService();
+    public static final GameService gameService = new GameService();
 
     /**
      * Точка входа в JavaFX-приложение. Загружает экран настроек игры.
@@ -32,6 +38,7 @@ public class Main extends Application {
     public static void showConfigScene() throws Exception {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/ru/nsu/abramkin/view/game_config.fxml"));
         Scene scene = new Scene(loader.load());
+
         primaryStage.setTitle("Настройка Змейки");
         primaryStage.setScene(scene);
 
@@ -55,6 +62,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/ru/nsu/abramkin/view/game.fxml"));
         Scene scene = new Scene(loader.load());
         GameController controller = loader.getController();
+        gameService.setGameController(controller);
         controller.initGame(rows, cols, food, winLength);
         primaryStage.setScene(scene);
 

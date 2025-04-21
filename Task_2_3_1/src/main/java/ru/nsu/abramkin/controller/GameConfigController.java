@@ -3,6 +3,9 @@ package ru.nsu.abramkin.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import ru.nsu.abramkin.Main;
+import ru.nsu.abramkin.service.ConfigService;
+
+import static ru.nsu.abramkin.Main.configService;
 
 /**
  * Контроллер для экрана конфигурации игры.
@@ -61,9 +64,6 @@ public class GameConfigController {
      * @return true, если конфигурация валидна; false — в противном случае
      */
     public static boolean isValidConfig(int rows, int cols, int food, int winLength) {
-        if (rows < 5 || rows > 30 || cols < 5 || cols > 30) return false;
-        if (food < 1 || food > 16) return false;
-        if (winLength < 2 || winLength > rows * cols) return false;
-        return true;
+        return configService.validateConfig(rows, cols, food, winLength);
     }
 }
