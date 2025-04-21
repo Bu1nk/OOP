@@ -6,27 +6,51 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.nsu.abramkin.controller.GameController;
 
+/**
+ * Главный класс JavaFX-приложения. Отвечает за запуск и переключение между сценами.
+ */
 public class Main extends Application {
     private static Stage primaryStage;
 
+    /**
+     * Точка входа в JavaFX-приложение. Загружает экран настроек игры.
+     *
+     * @param stage основное окно приложения
+     * @throws Exception при ошибке загрузки FXML
+     */
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
         showConfigScene();
     }
 
+    /**
+     * Загружает и отображает сцену настроек игры (game_config.fxml).
+     *
+     * @throws Exception при ошибке загрузки FXML
+     */
     public static void showConfigScene() throws Exception {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/ru/nsu/abramkin/view/game_config.fxml"));
         Scene scene = new Scene(loader.load());
         primaryStage.setTitle("Настройка Змейки");
         primaryStage.setScene(scene);
 
+        // Установка стандартных размеров окна
         primaryStage.setWidth(400);
         primaryStage.setHeight(300);
 
         primaryStage.show();
     }
 
+    /**
+     * Запускает игру с заданными параметрами, инициализируя контроллер.
+     *
+     * @param rows       количество строк игрового поля
+     * @param cols       количество столбцов игрового поля
+     * @param food       количество еды на поле
+     * @param winLength  длина змейки, при которой считается победа
+     * @throws Exception при ошибке загрузки FXML
+     */
     public static void startGameWithConfig(int rows, int cols, int food, int winLength) throws Exception {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/ru/nsu/abramkin/view/game.fxml"));
         Scene scene = new Scene(loader.load());
@@ -41,6 +65,11 @@ public class Main extends Application {
         primaryStage.setHeight(height);
     }
 
+    /**
+     * Запускает приложение.
+     *
+     * @param args аргументы командной строки (не используются)
+     */
     public static void main(String[] args) {
         launch(args);
     }

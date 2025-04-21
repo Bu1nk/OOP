@@ -26,31 +26,31 @@ public class SnakeTest {
     public void testMoveWithoutGrowth() {
         snake.move(false);
         assertEquals(new Point2D(6, 5), snake.getHead());
-        assertEquals(1, snake.getBody().size()); // не вырос
+        assertEquals(1, snake.getBody().size());
     }
 
     @Test
     public void testMoveWithGrowth() {
         snake.move(true);
         assertEquals(new Point2D(6, 5), snake.getHead());
-        assertEquals(2, snake.getBody().size()); // вырос
+        assertEquals(2, snake.getBody().size());
     }
 
     @Test
     public void testDirectionChangeValid() {
-        snake.setDirection(Direction.DOWN); // допустимая смена
+        snake.setDirection(Direction.DOWN);
         assertEquals(Direction.DOWN, snake.getDirection());
     }
 
     @Test
     public void testDirectionChangeToOpposite() {
-        snake.setDirection(Direction.LEFT); // противоположное RIGHT
-        assertEquals(Direction.RIGHT, snake.getDirection()); // не изменилось
+        snake.setDirection(Direction.LEFT);
+        assertEquals(Direction.RIGHT, snake.getDirection());
     }
 
     @Test
     public void testIsCollidingTrue() {
-        snake.move(true); // растем, тело: [6,5], [5,5]
+        snake.move(true); 
         assertTrue(snake.isColliding(new Point2D(5, 5)));
     }
 

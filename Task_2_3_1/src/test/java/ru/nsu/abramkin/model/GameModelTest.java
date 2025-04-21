@@ -42,36 +42,34 @@ public class GameModelTest {
 
     @Test
     public void testUpdateEatsFood() {
-        // Ставим еду прямо перед змейкой
         Snake snake = model.getSnake();
         Point2D next = snake.getNextHeadPosition();
         model.getFood().clear();
         model.getFood().add(next);
 
         int sizeBefore = snake.getBody().size();
-        boolean alive = model.update(); // съедает
+        boolean alive = model.update();
         int sizeAfter = snake.getBody().size();
 
         assertTrue(alive);
-        assertEquals(sizeBefore + 1, sizeAfter); // вырос
+        assertEquals(sizeBefore + 1, sizeAfter);
     }
 
     @Test
     public void testUpdateGameOverWhenHitsWall() {
-        // Направим змею влево к краю
         Snake snake = model.getSnake();
         snake.setDirection(Direction.LEFT);
 
-        while (model.update()); // идёт до столкновения
+        while (model.update());
 
-        assertFalse(model.update()); // уже мёртвая
+        assertFalse(model.update());
     }
 
     @Test
     public void testVictoryCondition() {
         Snake snake = model.getSnake();
         for (int i = 0; i < winLength - 1; i++) {
-            snake.move(true); // ручное удлинение
+            snake.move(true);
         }
         assertTrue(model.isVictory());
     }

@@ -14,14 +14,14 @@ import ru.nsu.abramkin.model.*;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
 
+/**
+ * Контроллер основного игрового экрана.
+ * Управляет игровым циклом, отрисовкой, вводом и завершением игры.
+ */
 public class GameController {
-    @FXML
-    Canvas canvas;
-    @FXML
-    Label statusLabel;
-    @FXML
-    VBox endOverlay;
-
+    @FXML Canvas canvas;
+    @FXML Label statusLabel;
+    @FXML VBox endOverlay;
 
     private int rows, cols, foodCount, winLength;
 
@@ -29,6 +29,15 @@ public class GameController {
     private GameModel model;
     private Timeline timeline;
 
+    /**
+     * Инициализирует игру с заданными параметрами.
+     * Настраивает модель, запускает игровой цикл и фокус на canvas.
+     *
+     * @param rows количество строк игрового поля
+     * @param cols количество столбцов
+     * @param foodCount количество еды на поле
+     * @param winLength длина змейки для победы
+     */
     public void initGame(int rows, int cols, int foodCount, int winLength) {
         this.rows = rows;
         this.cols = cols;
@@ -46,6 +55,11 @@ public class GameController {
         statusLabel.setText("");
     }
 
+    /**
+     * Обрабатывает нажатие клавиш и меняет направление движения змейки.
+     *
+     * @param e событие клавиши
+     */
     private void handleKey(KeyEvent e) {
         switch (e.getCode()) {
             case UP, W -> model.getSnake().setDirection(Direction.UP);
@@ -55,6 +69,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Основной игровой цикл.
+     * Обновляет модель, проверяет условия завершения и перерисовывает поле.
+     */
     private void gameLoop() {
         boolean alive = model.update();
         draw();
@@ -65,17 +83,28 @@ public class GameController {
         }
     }
 
+    /**
+     * Завершает игру, останавливает таймер и показывает сообщение.
+     *
+     * @param message текст сообщения о завершении
+     */
     private void endGame(String message) {
         timeline.stop();
         statusLabel.setText(message);
         endOverlay.setVisible(true);
     }
 
+    /**
+     * Перезапускает игру с текущими параметрами.
+     */
     @FXML
     void restartGame() {
         initGame(rows, cols, foodCount, winLength);
     }
 
+    /**
+     * Отрисовывает текущее состояние поля, змейки и еды.
+     */
     private void draw() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -98,11 +127,11 @@ public class GameController {
         for (int i = 0; i < body.size(); i++) {
             Point2D part = body.get(i);
             if (i == 0) {
-                gc.setFill(Color.DARKGREEN); // голова
+                gc.setFill(Color.DARKGREEN);
             } else if (i == body.size() - 1) {
-                gc.setFill(Color.LIGHTGREEN); // хвост
+                gc.setFill(Color.LIGHTGREEN);
             } else {
-                gc.setFill(Color.GREEN); // тело
+                gc.setFill(Color.GREEN);
             }
             gc.fillRect(part.getX() * CELL_SIZE, part.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
@@ -113,6 +142,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Возвращает пользователя на экран настроек игры.
+     */
     @FXML
     private void goToSettings() {
         try {
