@@ -23,6 +23,12 @@ test {
     useJUnitPlatform()
 }
 
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
 application {
     mainClass = 'ru.nsu.abramkin.Main'
 }
