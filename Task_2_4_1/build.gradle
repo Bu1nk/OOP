@@ -22,16 +22,23 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.11"
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.required = true
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                '**/Main.class'
+                '**/Main.class',
+                '**/config/**'
             ])
         }))
     }
