@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.abramkin"},{"l":"ru.nsu.abramkin.dsl"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.abramkin"},{"l":"ru.nsu.abramkin.dsl"},{"l":"ru.nsu.abramkin.dsl.data"}];updateSearchResults();
