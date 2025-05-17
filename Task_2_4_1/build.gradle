@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'application'
+    id 'jacoco'
+}
+
+group = 'ru.nsu.abramkin'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:3.0.9'
+    implementation 'org.codehaus.groovy:groovy-templates:3.0.9'
+    implementation 'com.puppycrawl.tools:checkstyle:10.12.5'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                '**/Main.class',
+                '**/config/**'
+            ])
+        }))
+    }
+}
+
+application {
+    mainClass = 'ru.nsu.abramkin.Main'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(GroovyCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// Task to download Checkstyle JAR
+tasks.register('downloadCheckstyle') {
+    doLast {
+        def checkstyleJar = new File('checkstyle.jar')
+        if (!checkstyleJar.exists()) {
+            def checkstyleUrl = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.12.5/checkstyle-10.12.5-all.jar'
+            new URL(checkstyleUrl).withInputStream { i -> checkstyleJar.withOutputStream { it << i } }
+        }
+    }
+}
+
+run.dependsOn downloadCheckstyle
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

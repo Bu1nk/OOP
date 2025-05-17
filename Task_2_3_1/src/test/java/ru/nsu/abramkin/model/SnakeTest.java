@@ -50,7 +50,7 @@ public class SnakeTest {
 
     @Test
     public void testIsCollidingTrue() {
-        snake.move(true); 
+        snake.move(true);
         assertTrue(snake.isColliding(new Point2D(5, 5)));
     }
 
