@@ -1,18 +1,20 @@
 package ru.nsu.abramkin.dsl;
 
 import groovy.lang.Closure;
+import ru.nsu.abramkin.dsl.data.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Configuration {
-    private List<TaskConfig> tasks = new ArrayList<>();
-    private List<GroupConfig> groups = new ArrayList<>();
-    private List<CheckpointConfig> checkpoints = new ArrayList<>();
-    private SystemConfig system = new SystemConfig();
+    private final List<TaskConfig> tasks = new ArrayList<>();
+    private final List<GroupConfig> groups = new ArrayList<>();
+    private final List<CheckpointConfig> checkpoints = new ArrayList<>();
+    private final SystemConfig system = new SystemConfig();
     private List<String> assignmentTasks = new ArrayList<>();
     private List<String> assignmentStudents = new ArrayList<>();
 
-    public void tasks(Closure closure) {
+    public void tasks(Closure<Task> closure) {
         closure.setDelegate(this);
         closure.setResolveStrategy(Closure.DELEGATE_FIRST);
         closure.call();

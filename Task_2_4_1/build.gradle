@@ -48,16 +48,16 @@ application {
     mainClass = 'ru.nsu.abramkin.Main'
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-tasks.withType(GroovyCompile) {
+tasks.withType(GroovyCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
 // Task to download Checkstyle JAR
-task downloadCheckstyle {
+tasks.register('downloadCheckstyle') {
     doLast {
         def checkstyleJar = new File('checkstyle.jar')
         if (!checkstyleJar.exists()) {
@@ -68,14 +68,6 @@ task downloadCheckstyle {
 }
 
 run.dependsOn downloadCheckstyle
-
-sourceSets {
-    main {
-        groovy {
-            srcDirs = ['src/main/groovy']
-        }
-    }
-}
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE

@@ -25,16 +25,15 @@ import org.w3c.dom.Element;
 
 public class Main {
     private static final String CONFIG_FILE = "config.groovy";
-    private Configuration config;
-    private Map<String, Map<String, TaskResult>> results = new HashMap<>();
+    private static Configuration config;
+    private final static  Map<String, Map<String, TaskResult>> results = new HashMap<>();
 
     public static void main(String[] args) {
-        Main app = new Main();
         try {
             System.out.println("Starting application...");
-            app.loadConfiguration();
-            app.processTasks();
-            app.generateReport();
+            loadConfiguration();
+            processTasks();
+            generateReport();
             System.out.println("Application finished successfully.");
         } catch (Exception e) {
             System.err.println("Application failed with error: " + e.getMessage());
@@ -42,7 +41,7 @@ public class Main {
         }
     }
 
-    private void loadConfiguration() {
+    private static void loadConfiguration() {
         try {
             System.out.println("Loading configuration from " + CONFIG_FILE);
             Binding binding = new Binding();
@@ -50,10 +49,10 @@ public class Main {
             Object result = shell.evaluate(new File(CONFIG_FILE));
             
             if (result instanceof Configuration) {
-                this.config = (Configuration) result;
+                config = (Configuration) result;
                 System.out.println("Configuration loaded successfully.");
-                System.out.println("Tasks to check: " + this.config.getAssignmentTasks());
-                System.out.println("Students to check: " + this.config.getAssignmentStudents());
+                System.out.println("Tasks to check: " + config.getAssignmentTasks());
+                System.out.println("Students to check: " + config.getAssignmentStudents());
             } else {
                 throw new IllegalStateException("Configuration script did not return a Configuration object");
             }
@@ -64,7 +63,7 @@ public class Main {
         }
     }
 
-    private void processTasks() {
+    private static void processTasks() {
         System.out.println("Starting task processing...");
         
         // Copy Checkstyle configuration
@@ -108,7 +107,7 @@ public class Main {
         System.out.println("Task processing completed.");
     }
 
-    private StudentConfig findStudent(String studentId) {
+    private static StudentConfig findStudent(String studentId) {
         return config.getGroups().stream()
                 .flatMap(group -> group.getStudents().stream())
                 .filter(student -> student.getGithubUsername().equals(studentId))
@@ -116,14 +115,14 @@ public class Main {
                 .orElse(null);
     }
 
-    private TaskConfig findTask(String taskId) {
+    private static TaskConfig findTask(String taskId) {
         return config.getTasks().stream()
                 .filter(task -> task.getId().equals(taskId))
                 .findFirst()
                 .orElse(null);
     }
 
-    private void cloneRepository(StudentConfig student) {
+    private static void cloneRepository(StudentConfig student) {
         try {
             String repoPath = "repos/" + student.getGithubUsername();
             System.out.println("Cloning repository to: " + repoPath);
@@ -160,7 +159,7 @@ public class Main {
         }
     }
 
-    private void deleteDirectory(File directory) {
+    private static void deleteDirectory(File directory) {
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
@@ -174,7 +173,7 @@ public class Main {
         directory.delete();
     }
 
-    private TaskResult checkTask(StudentConfig student, TaskConfig task) {
+    private static TaskResult checkTask(StudentConfig student, TaskConfig task) {
         TaskResult result = new TaskResult();
         String taskPath = "repos/" + student.getGithubUsername() + "/" + task.getId();
         System.out.println("Checking task at path: " + taskPath);
@@ -210,7 +209,7 @@ public class Main {
         return result;
     }
 
-    private boolean compileTask(String taskPath) {
+    private static boolean compileTask(String taskPath) {
         try {
             System.out.println("Compiling task at: " + taskPath);
             
@@ -285,7 +284,7 @@ public class Main {
         }
     }
 
-    private TestResult runTests(String taskPath) {
+    private static TestResult runTests(String taskPath) {
         TestResult result = new TestResult();
         try {
             System.out.println("Running tests for: " + taskPath);
@@ -399,7 +398,7 @@ public class Main {
         return count;
     }
 
-    private void calculatePoints(TaskResult result, TaskConfig task, StudentConfig student) {
+    private static void calculatePoints(TaskResult result, TaskConfig task, StudentConfig student) {
         int points = 0;
         // Проверяем дату сдачи (по текущей дате)
         java.time.LocalDate now = java.time.LocalDate.now();
@@ -414,7 +413,7 @@ public class Main {
         System.out.println("Calculated points for task " + task.getId() + ": " + points);
     }
 
-    private void generateReport() {
+    private static void generateReport() {
         try {
             System.out.println("Generating HTML report...");
             try (FileWriter writer = new FileWriter("report.html")) {
